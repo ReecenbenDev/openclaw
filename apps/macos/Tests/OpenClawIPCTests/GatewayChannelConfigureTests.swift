@@ -1,8 +1,8 @@
-import OpenClawKit
+import ReecenbotKit
 import Foundation
 import os
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite struct GatewayConnectionTests {
     private final class FakeWebSocketTask: WebSocketTasking, @unchecked Sendable {

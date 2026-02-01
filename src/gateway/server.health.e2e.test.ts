@@ -219,7 +219,7 @@ describe("gateway server health/presence", () => {
   });
 
   test("presence includes client fingerprint", async () => {
-    const identityPath = path.join(os.tmpdir(), `openclaw-device-${randomUUID()}.json`);
+    const identityPath = path.join(os.tmpdir(), `reecenbot-device-${randomUUID()}.json`);
     const identity = loadOrCreateDeviceIdentity(identityPath);
     const role = "operator";
     const scopes: string[] = [];

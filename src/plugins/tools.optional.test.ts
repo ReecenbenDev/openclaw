@@ -11,7 +11,7 @@ const tempDirs: string[] = [];
 const EMPTY_PLUGIN_SCHEMA = { type: "object", additionalProperties: false, properties: {} };
 
 function makeTempDir() {
-  const dir = path.join(os.tmpdir(), `openclaw-plugin-tools-${randomUUID()}`);
+  const dir = path.join(os.tmpdir(), `reecenbot-plugin-tools-${randomUUID()}`);
   fs.mkdirSync(dir, { recursive: true });
   tempDirs.push(dir);
   return dir;

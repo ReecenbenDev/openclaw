@@ -184,7 +184,7 @@ describe("update-cli", () => {
     await updateStatusCommand({ json: false });
 
     const logs = vi.mocked(defaultRuntime.log).mock.calls.map((call) => call[0]);
-    expect(logs.join("\n")).toContain("OpenClaw update status");
+    expect(logs.join("\n")).toContain("Reecenbot update status");
   });
 
   it("updateStatusCommand emits JSON", async () => {
@@ -217,11 +217,11 @@ describe("update-cli", () => {
   });
 
   it("defaults to stable channel for package installs when unset", async () => {
-    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-update-"));
+    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "reecenbot-update-"));
     try {
       await fs.writeFile(
         path.join(tempDir, "package.json"),
-        JSON.stringify({ name: "openclaw", version: "1.0.0" }),
+        JSON.stringify({ name: "reecenbot", version: "1.0.0" }),
         "utf-8",
       );
 
@@ -282,11 +282,11 @@ describe("update-cli", () => {
   });
 
   it("falls back to latest when beta tag is older than release", async () => {
-    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-update-"));
+    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "reecenbot-update-"));
     try {
       await fs.writeFile(
         path.join(tempDir, "package.json"),
-        JSON.stringify({ name: "openclaw", version: "1.0.0" }),
+        JSON.stringify({ name: "reecenbot", version: "1.0.0" }),
         "utf-8",
       );
 
@@ -335,11 +335,11 @@ describe("update-cli", () => {
   });
 
   it("honors --tag override", async () => {
-    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-update-"));
+    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "reecenbot-update-"));
     try {
       await fs.writeFile(
         path.join(tempDir, "package.json"),
-        JSON.stringify({ name: "openclaw", version: "1.0.0" }),
+        JSON.stringify({ name: "reecenbot", version: "1.0.0" }),
         "utf-8",
       );
 
@@ -513,12 +513,12 @@ describe("update-cli", () => {
   });
 
   it("requires confirmation on downgrade when non-interactive", async () => {
-    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-update-"));
+    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "reecenbot-update-"));
     try {
       setTty(false);
       await fs.writeFile(
         path.join(tempDir, "package.json"),
-        JSON.stringify({ name: "openclaw", version: "2.0.0" }),
+        JSON.stringify({ name: "reecenbot", version: "2.0.0" }),
         "utf-8",
       );
 
@@ -566,12 +566,12 @@ describe("update-cli", () => {
   });
 
   it("allows downgrade with --yes in non-interactive mode", async () => {
-    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-update-"));
+    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "reecenbot-update-"));
     try {
       setTty(false);
       await fs.writeFile(
         path.join(tempDir, "package.json"),
-        JSON.stringify({ name: "openclaw", version: "2.0.0" }),
+        JSON.stringify({ name: "reecenbot", version: "2.0.0" }),
         "utf-8",
       );
 
@@ -635,7 +635,7 @@ describe("update-cli", () => {
   });
 
   it("updateWizardCommand offers dev checkout and forwards selections", async () => {
-    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-update-wizard-"));
+    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "reecenbot-update-wizard-"));
     const previousGitDir = process.env.OPENCLAW_GIT_DIR;
     try {
       setTty(true);

@@ -1,4 +1,4 @@
-package ai.openclaw.android.node
+package ai.reecenbot.android.node
 
 import android.Manifest
 import android.content.Context
@@ -22,7 +22,7 @@ import androidx.camera.video.VideoRecordEvent
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.graphics.scale
-import ai.openclaw.android.PermissionRequester
+import ai.reecenbot.android.PermissionRequester
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeout

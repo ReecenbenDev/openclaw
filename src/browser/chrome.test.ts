@@ -4,13 +4,13 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
-  decorateOpenClawProfile,
+  decorateReecenbotProfile,
   ensureProfileCleanExit,
   findChromeExecutableMac,
   findChromeExecutableWindows,
   isChromeReachable,
   resolveBrowserExecutableForPlatform,
-  stopOpenClawChrome,
+  stopReecenbotChrome,
 } from "./chrome.js";
 import {
   DEFAULT_OPENCLAW_BROWSER_COLOR,
@@ -29,9 +29,9 @@ describe("browser chrome profile decoration", () => {
   });
 
   it("writes expected name + signed ARGB seed to Chrome prefs", async () => {
-    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "openclaw-chrome-test-"));
+    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "reecenbot-chrome-test-"));
     try {
-      decorateOpenClawProfile(userDataDir, { color: DEFAULT_OPENCLAW_BROWSER_COLOR });
+      decorateReecenbotProfile(userDataDir, { color: DEFAULT_OPENCLAW_BROWSER_COLOR });
 
       const expectedSignedArgb = ((0xff << 24) | 0xff4500) >> 0;
 
@@ -67,9 +67,9 @@ describe("browser chrome profile decoration", () => {
   });
 
   it("best-effort writes name when color is invalid", async () => {
-    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "openclaw-chrome-test-"));
+    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "reecenbot-chrome-test-"));
     try {
-      decorateOpenClawProfile(userDataDir, { color: "lobster-orange" });
+      decorateReecenbotProfile(userDataDir, { color: "lobster-orange" });
       const localState = await readJson(path.join(userDataDir, "Local State"));
       const profile = localState.profile as Record<string, unknown>;
       const infoCache = profile.info_cache as Record<string, unknown>;
@@ -83,7 +83,7 @@ describe("browser chrome profile decoration", () => {
   });
 
   it("recovers from missing/invalid preference files", async () => {
-    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "openclaw-chrome-test-"));
+    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "reecenbot-chrome-test-"));
     try {
       await fsp.mkdir(path.join(userDataDir, "Default"), { recursive: true });
       await fsp.writeFile(path.join(userDataDir, "Local State"), "{", "utf-8"); // invalid JSON
@@ -93,7 +93,7 @@ describe("browser chrome profile decoration", () => {
         "utf-8",
       );
 
-      decorateOpenClawProfile(userDataDir, { color: DEFAULT_OPENCLAW_BROWSER_COLOR });
+      decorateReecenbotProfile(userDataDir, { color: DEFAULT_OPENCLAW_BROWSER_COLOR });
 
       const localState = await readJson(path.join(userDataDir, "Local State"));
       expect(typeof localState.profile).toBe("object");
@@ -106,7 +106,7 @@ describe("browser chrome profile decoration", () => {
   });
 
   it("writes clean exit prefs to avoid restore prompts", async () => {
-    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "openclaw-chrome-test-"));
+    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "reecenbot-chrome-test-"));
     try {
       ensureProfileCleanExit(userDataDir);
       const prefs = await readJson(path.join(userDataDir, "Default", "Preferences"));
@@ -118,10 +118,10 @@ describe("browser chrome profile decoration", () => {
   });
 
   it("is idempotent when rerun on an existing profile", async () => {
-    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "openclaw-chrome-test-"));
+    const userDataDir = await fsp.mkdtemp(path.join(os.tmpdir(), "reecenbot-chrome-test-"));
     try {
-      decorateOpenClawProfile(userDataDir, { color: DEFAULT_OPENCLAW_BROWSER_COLOR });
-      decorateOpenClawProfile(userDataDir, { color: DEFAULT_OPENCLAW_BROWSER_COLOR });
+      decorateReecenbotProfile(userDataDir, { color: DEFAULT_OPENCLAW_BROWSER_COLOR });
+      decorateReecenbotProfile(userDataDir, { color: DEFAULT_OPENCLAW_BROWSER_COLOR });
 
       const prefs = await readJson(path.join(userDataDir, "Default", "Preferences"));
       const profile = prefs.profile as Record<string, unknown>;
@@ -232,26 +232,26 @@ describe("browser chrome helpers", () => {
     await expect(isChromeReachable("http://127.0.0.1:12345", 50)).resolves.toBe(false);
   });
 
-  it("stopOpenClawChrome no-ops when process is already killed", async () => {
+  it("stopReecenbotChrome no-ops when process is already killed", async () => {
     const proc = { killed: true, exitCode: null, kill: vi.fn() };
-    await stopOpenClawChrome(
+    await stopReecenbotChrome(
       {
         proc,
         cdpPort: 12345,
-      } as unknown as Parameters<typeof stopOpenClawChrome>[0],
+      } as unknown as Parameters<typeof stopReecenbotChrome>[0],
       10,
     );
     expect(proc.kill).not.toHaveBeenCalled();
   });
 
-  it("stopOpenClawChrome sends SIGTERM and returns once CDP is down", async () => {
+  it("stopReecenbotChrome sends SIGTERM and returns once CDP is down", async () => {
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("down")));
     const proc = { killed: false, exitCode: null, kill: vi.fn() };
-    await stopOpenClawChrome(
+    await stopReecenbotChrome(
       {
         proc,
         cdpPort: 12345,
-      } as unknown as Parameters<typeof stopOpenClawChrome>[0],
+      } as unknown as Parameters<typeof stopReecenbotChrome>[0],
       10,
     );
     expect(proc.kill).toHaveBeenCalledWith("SIGTERM");

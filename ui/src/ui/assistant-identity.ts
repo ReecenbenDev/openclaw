@@ -12,9 +12,18 @@ export type AssistantIdentity = {
 
 declare global {
   interface Window {
+    __OPENCLAW_BRAND_DISPLAY_NAME__?: string;
     __OPENCLAW_ASSISTANT_NAME__?: string;
     __OPENCLAW_ASSISTANT_AVATAR__?: string;
   }
+}
+
+export const DEFAULT_BRAND_DISPLAY_NAME = "Reecenbot";
+
+export function resolveInjectedBrandDisplayName(): string {
+  if (typeof window === "undefined") return DEFAULT_BRAND_DISPLAY_NAME;
+  const v = window.__OPENCLAW_BRAND_DISPLAY_NAME__?.trim();
+  return v ?? DEFAULT_BRAND_DISPLAY_NAME;
 }
 
 function coerceIdentityValue(value: string | undefined, maxLength: number): string | undefined {

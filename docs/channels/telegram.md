@@ -69,8 +69,10 @@ Example:
 }
 ```
 
-Env option: `TELEGRAM_BOT_TOKEN=...` (works for the default account).
+Env option: `TELEGRAM_BOT_TOKEN=...` (works for the default account when the gateway process sees it).
 If both env and config are set, config takes precedence.
+
+**If the gateway runs as a daemon (launchd/systemd):** it does not load `.env` from your project. Either put the token in config (`channels.telegram.botToken`) so the daemon has it, or ensure the service environment includes `TELEGRAM_BOT_TOKEN` (e.g. via `config.env` or your platform’s service env).
 
 Multi-account support: use `channels.telegram.accounts` with per-account tokens and optional `name`. See [`gateway/configuration`](/gateway/configuration#telegramaccounts--discordaccounts--slackaccounts--signalaccounts--imessageaccounts) for the shared pattern.
 
@@ -112,7 +114,7 @@ group messages, so use admin if you need full visibility.
 
 ## Draft streaming
 
-OpenClaw can stream partial replies in Telegram DMs using `sendMessageDraft`.
+Reecenbot can stream partial replies in Telegram DMs using `sendMessageDraft`.
 
 Requirements:
 
@@ -127,11 +129,11 @@ Draft streaming is DM-only; Telegram does not support it in groups or channels.
 - Outbound Telegram text uses `parse_mode: "HTML"` (Telegram’s supported tag subset).
 - Markdown-ish input is rendered into **Telegram-safe HTML** (bold/italic/strike/code/links); block elements are flattened to text with newlines/bullets.
 - Raw HTML from models is escaped to avoid Telegram parse errors.
-- If Telegram rejects the HTML payload, OpenClaw retries the same message as plain text.
+- If Telegram rejects the HTML payload, Reecenbot retries the same message as plain text.
 
 ## Commands (native + custom)
 
-OpenClaw registers native commands (like `/status`, `/reset`, `/model`) with Telegram’s bot menu on startup.
+Reecenbot registers native commands (like `/status`, `/reset`, `/model`) with Telegram’s bot menu on startup.
 You can add custom commands to the menu via config:
 
 ```json5
@@ -156,7 +158,7 @@ More help: [Channel troubleshooting](/channels/troubleshooting).
 
 Notes:
 
-- Custom commands are **menu entries only**; OpenClaw does not implement them unless you handle them elsewhere.
+- Custom commands are **menu entries only**; Reecenbot does not implement them unless you handle them elsewhere.
 - Command names are normalized (leading `/` stripped, lowercased) and must match `a-z`, `0-9`, `_` (1–32 chars).
 - Custom commands **cannot override native commands**. Conflicts are ignored and logged.
 - If `commands.native` is disabled, only custom commands are registered (or cleared if none).
@@ -242,7 +244,7 @@ By default, Telegram is allowed to write config updates triggered by channel eve
 
 This happens when:
 
-- A group is upgraded to a supergroup and Telegram emits `migrate_to_chat_id` (chat ID changes). OpenClaw can migrate `channels.telegram.groups` automatically.
+- A group is upgraded to a supergroup and Telegram emits `migrate_to_chat_id` (chat ID changes). Reecenbot can migrate `channels.telegram.groups` automatically.
 - You run `/config set` or `/config unset` in a Telegram chat (requires `commands.config: true`).
 
 Disable with:
@@ -255,7 +257,7 @@ Disable with:
 
 ## Topics (forum supergroups)
 
-Telegram forum topics include a `message_thread_id` per message. OpenClaw:
+Telegram forum topics include a `message_thread_id` per message. Reecenbot:
 
 - Appends `:topic:<threadId>` to the Telegram group session key so each topic is isolated.
 - Sends typing indicators and replies with `message_thread_id` so responses stay in the topic.
@@ -264,7 +266,7 @@ Telegram forum topics include a `message_thread_id` per message. OpenClaw:
 - Topic-specific configuration is available under `channels.telegram.groups.<chatId>.topics.<threadId>` (skills, allowlists, auto-reply, system prompts, disable).
 - Topic configs inherit group settings (requireMention, allowlists, skills, prompts, enabled) unless overridden per topic.
 
-Private chats can include `message_thread_id` in some edge cases. OpenClaw keeps the DM session key unchanged, but still uses the thread id for replies/draft streaming when it is present.
+Private chats can include `message_thread_id` in some edge cases. Reecenbot keeps the DM session key unchanged, but still uses the thread id for replies/draft streaming when it is present.
 
 ## Inline Buttons
 
@@ -413,7 +415,7 @@ Controlled by `channels.telegram.replyToMode`:
 ## Audio messages (voice vs file)
 
 Telegram distinguishes **voice notes** (round bubble) from **audio files** (metadata card).
-OpenClaw defaults to audio files for backward compatibility.
+Reecenbot defaults to audio files for backward compatibility.
 
 To force a voice note bubble in agent replies, include this tag anywhere in the reply:
 
@@ -436,11 +438,11 @@ For message tool sends, set `asVoice: true` with a voice-compatible audio `media
 
 ## Stickers
 
-OpenClaw supports receiving and sending Telegram stickers with intelligent caching.
+Reecenbot supports receiving and sending Telegram stickers with intelligent caching.
 
 ### Receiving stickers
 
-When a user sends a sticker, OpenClaw handles it based on the sticker type:
+When a user sends a sticker, Reecenbot handles it based on the sticker type:
 
 - **Static stickers (WEBP):** Downloaded and processed through vision. The sticker appears as a `<media:sticker>` placeholder in the message content.
 - **Animated stickers (TGS):** Skipped (Lottie format not supported for processing).
@@ -457,7 +459,7 @@ Template context field available when receiving stickers:
 
 ### Sticker cache
 
-Stickers are processed through the AI's vision capabilities to generate descriptions. Since the same stickers are often sent repeatedly, OpenClaw caches these descriptions to avoid redundant API calls.
+Stickers are processed through the AI's vision capabilities to generate descriptions. Since the same stickers are often sent repeatedly, Reecenbot caches these descriptions to avoid redundant API calls.
 
 **How it works:**
 
@@ -569,7 +571,7 @@ The search uses fuzzy matching across description text, emoji characters, and se
 ## Streaming (drafts)
 
 Telegram can stream **draft bubbles** while the agent is generating a response.
-OpenClaw uses Bot API `sendMessageDraft` (not real messages) and then sends the
+Reecenbot uses Bot API `sendMessageDraft` (not real messages) and then sends the
 final reply as a normal message.
 
 Requirements (Telegram Bot API 9.3+):
@@ -614,7 +616,7 @@ Outbound Telegram API calls retry on transient network/429 errors with exponenti
 ## Reaction notifications
 
 **How reactions work:**
-Telegram reactions arrive as **separate `message_reaction` events**, not as properties in message payloads. When a user adds a reaction, OpenClaw:
+Telegram reactions arrive as **separate `message_reaction` events**, not as properties in message payloads. When a user adds a reaction, Reecenbot:
 
 1. Receives the `message_reaction` update from Telegram API
 2. Converts it to a **system event** with format: `"Telegram reaction added: {emoji} by {user} on msg {id}"`
@@ -653,7 +655,7 @@ The agent sees reactions as **system notifications** in the conversation history
 
 **Requirements:**
 
-- Telegram bots must explicitly request `message_reaction` in `allowed_updates` (configured automatically by OpenClaw)
+- Telegram bots must explicitly request `message_reaction` in `allowed_updates` (configured automatically by Reecenbot)
 - For webhook mode, reactions are included in the webhook `allowed_updates`
 - For polling mode, reactions are included in the `getUpdates` `allowed_updates`
 
@@ -668,8 +670,8 @@ The agent sees reactions as **system notifications** in the conversation history
 
 - If you set `channels.telegram.groups.*.requireMention=false`, Telegram’s Bot API **privacy mode** must be disabled.
   - BotFather: `/setprivacy` → **Disable** (then remove + re-add the bot to the group)
-- `openclaw channels status` shows a warning when config expects unmentioned group messages.
-- `openclaw channels status --probe` can additionally check membership for explicit numeric group IDs (it can’t audit wildcard `"*"` rules).
+- `reecenbot channels status` shows a warning when config expects unmentioned group messages.
+- `reecenbot channels status --probe` can additionally check membership for explicit numeric group IDs (it can’t audit wildcard `"*"` rules).
 - Quick test: `/activation always` (session-only; use config for persistence)
 
 **Bot not seeing group messages at all:**
@@ -692,7 +694,7 @@ The agent sees reactions as **system notifications** in the conversation history
 **Long-polling aborts immediately on Node 22+ (often with proxies/custom fetch):**
 
 - Node 22+ is stricter about `AbortSignal` instances; foreign signals can abort `fetch` calls right away.
-- Upgrade to a OpenClaw build that normalizes abort signals, or run the gateway on Node 20 until you can upgrade.
+- Upgrade to a Reecenbot build that normalizes abort signals, or run the gateway on Node 20 until you can upgrade.
 
 **Bot starts, then silently stops responding (or logs `HttpError: Network request ... failed`):**
 

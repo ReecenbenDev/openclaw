@@ -1,7 +1,7 @@
-import OpenClawProtocol
+import ReecenbotProtocol
 import Foundation
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite(.serialized) struct VoiceWakeGlobalSettingsSyncTests {
     @Test func appliesVoiceWakeChangedEventToAppState() async {
@@ -11,7 +11,7 @@ import Testing
             AppStateStore.shared.applyGlobalVoiceWakeTriggers(["before"])
         }
 
-        let payload = OpenClawProtocol.AnyCodable(["triggers": ["openclaw", "computer"]])
+        let payload = ReecenbotProtocol.AnyCodable(["triggers": ["openclaw", "computer"]])
         let evt = EventFrame(
             type: "event",
             event: "voicewake.changed",
@@ -36,7 +36,7 @@ import Testing
             AppStateStore.shared.applyGlobalVoiceWakeTriggers(["before"])
         }
 
-        let payload = OpenClawProtocol.AnyCodable(["unexpected": 123])
+        let payload = ReecenbotProtocol.AnyCodable(["unexpected": 123])
         let evt = EventFrame(
             type: "event",
             event: "voicewake.changed",

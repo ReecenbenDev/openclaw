@@ -1,6 +1,6 @@
-import OpenClawProtocol
+import ReecenbotProtocol
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite(.serialized)
 @MainActor

@@ -72,7 +72,7 @@ enum HealthState: Equatable {
 final class HealthStore {
     static let shared = HealthStore()
 
-    private static let logger = Logger(subsystem: "ai.openclaw", category: "health")
+    private static let logger = Logger(subsystem: "ai.reecenbot", category: "health")
 
     private(set) var snapshot: HealthSnapshot?
     private(set) var lastSuccess: Date?
@@ -241,7 +241,7 @@ final class HealthStore {
             if lower.contains("connection refused") {
                 let port = GatewayEnvironment.gatewayPort()
                 let host = GatewayConnectivityCoordinator.shared.localEndpointHostLabel ?? "127.0.0.1:\(port)"
-                return "The gateway control port (\(host)) isn’t listening — restart OpenClaw to bring it back."
+                return "The gateway control port (\(host)) isn’t listening — restart Reecenbot to bring it back."
             }
             if lower.contains("timeout") {
                 return "Timed out waiting for the control server; the gateway may be crashed or still starting."

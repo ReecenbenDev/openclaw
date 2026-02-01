@@ -28,6 +28,23 @@ openclaw status --deep
 
 ## Common “it broke” cases
 
+### App or gateway won't start / nothing works
+
+Run a full reset and setup from the repo root:
+
+```bash
+./scripts/reset-and-setup.sh
+```
+
+To wipe config and re-run onboarding from zero: `./scripts/reset-and-setup.sh --clean-config`. See [Reset and setup](/start/reset-and-setup).
+
+### Telegram (or other chat) not working
+
+1. **Token not seen by the gateway:** If the gateway runs as a daemon (launchd/systemd), it does **not** load `.env` from your project. Put the token in config: `channels.telegram.botToken: "YOUR_TOKEN"` in `~/.openclaw/openclaw.json`, or ensure the service environment has `TELEGRAM_BOT_TOKEN`.
+2. **Pairing:** DM your bot in Telegram; the bot will reply with a pairing code. Run `openclaw pairing approve telegram <CODE>` (replace `<CODE>` with the code).
+3. **Channel status:** `openclaw channels status --probe` to see if Telegram is connected.
+4. See [Telegram channel](/channels/telegram) and [Chat not working](/gateway/troubleshooting) for more.
+
 ### `openclaw: command not found`
 
 Almost always a Node/npm PATH issue. Start here:
@@ -39,13 +56,13 @@ Almost always a Node/npm PATH issue. Start here:
 Re-run the installer in verbose mode to see the full trace and npm output:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --verbose
+curl -fsSL https://reecenbot.ai/install.sh | bash -s -- --verbose
 ```
 
 For beta installs:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --beta --verbose
+curl -fsSL https://reecenbot.ai/install.sh | bash -s -- --beta --verbose
 ```
 
 You can also set `OPENCLAW_VERBOSE=1` instead of the flag.
@@ -60,10 +77,10 @@ You can also set `OPENCLAW_VERBOSE=1` instead of the flag.
 - [Gateway troubleshooting](/gateway/troubleshooting)
 - [Control UI](/web/control-ui#insecure-http)
 
-### `docs.openclaw.ai` shows an SSL error (Comcast/Xfinity)
+### `docs.reecenbot.ai` shows an SSL error (Comcast/Xfinity)
 
-Some Comcast/Xfinity connections block `docs.openclaw.ai` via Xfinity Advanced Security.
-Disable Advanced Security or add `docs.openclaw.ai` to the allowlist, then retry.
+Some Comcast/Xfinity connections block `docs.reecenbot.ai` via Xfinity Advanced Security.
+Disable Advanced Security or add `docs.reecenbot.ai` to the allowlist, then retry.
 
 - Xfinity Advanced Security help: https://www.xfinity.com/support/articles/using-xfinity-xfi-advanced-security
 - Quick sanity checks: try a mobile hotspot or VPN to confirm it’s ISP-level filtering

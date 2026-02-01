@@ -9,7 +9,7 @@ import { createSubsystemLogger } from "../../logging/subsystem.js";
 import { enablePluginInConfig } from "../../plugins/enable.js";
 import { installPluginFromNpmSpec } from "../../plugins/install.js";
 import { recordPluginInstall } from "../../plugins/installs.js";
-import { loadOpenClawPlugins } from "../../plugins/loader.js";
+import { loadReecenbotPlugins } from "../../plugins/loader.js";
 
 type InstallChoice = "npm" | "local" | "skip";
 
@@ -207,7 +207,7 @@ export function reloadOnboardingPluginRegistry(params: {
   const workspaceDir =
     params.workspaceDir ?? resolveAgentWorkspaceDir(params.cfg, resolveDefaultAgentId(params.cfg));
   const log = createSubsystemLogger("plugins");
-  loadOpenClawPlugins({
+  loadReecenbotPlugins({
     config: params.cfg,
     workspaceDir,
     cache: false,

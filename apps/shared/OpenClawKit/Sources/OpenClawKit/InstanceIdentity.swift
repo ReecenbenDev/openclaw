@@ -5,7 +5,7 @@ import UIKit
 #endif
 
 public enum InstanceIdentity {
-    private static let suiteName = "ai.openclaw.shared"
+    private static let suiteName = "ai.reecenbot.shared"
     private static let instanceIdKey = "instanceId"
 
     private static var defaults: UserDefaults {

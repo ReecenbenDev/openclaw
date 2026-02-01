@@ -1,6 +1,6 @@
 import AVFoundation
-import OpenClawIPC
-import OpenClawKit
+import ReecenbotIPC
+import ReecenbotKit
 import CoreGraphics
 import Foundation
 import OSLog
@@ -36,7 +36,7 @@ actor CameraCaptureService {
         }
     }
 
-    private let logger = Logger(subsystem: "ai.openclaw", category: "camera")
+    private let logger = Logger(subsystem: "ai.reecenbot", category: "camera")
 
     func listDevices() -> [CameraDeviceInfo] {
         Self.availableCameras().map { device in

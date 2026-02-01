@@ -1,4 +1,4 @@
-import OpenClawKit
+import ReecenbotKit
 import Foundation
 
 struct WideAreaGatewayBeacon: Sendable, Equatable {
@@ -50,7 +50,7 @@ enum WideAreaGatewayDiscovery {
             return []
         }
 
-        guard let domain = OpenClawBonjour.wideAreaGatewayServiceDomain else { return [] }
+        guard let domain = ReecenbotBonjour.wideAreaGatewayServiceDomain else { return [] }
         let domainTrimmed = domain.trimmingCharacters(in: CharacterSet(charactersIn: "."))
         let probeName = "_openclaw-gw._tcp.\(domainTrimmed)"
         guard let ptrLines = context.dig(
@@ -154,7 +154,7 @@ enum WideAreaGatewayDiscovery {
         remaining: () -> TimeInterval,
         dig: @escaping @Sendable (_ args: [String], _ timeout: TimeInterval) -> String?) -> String?
     {
-        guard let domain = OpenClawBonjour.wideAreaGatewayServiceDomain else { return nil }
+        guard let domain = ReecenbotBonjour.wideAreaGatewayServiceDomain else { return nil }
         let domainTrimmed = domain.trimmingCharacters(in: CharacterSet(charactersIn: "."))
         let probeName = "_openclaw-gw._tcp.\(domainTrimmed)"
 

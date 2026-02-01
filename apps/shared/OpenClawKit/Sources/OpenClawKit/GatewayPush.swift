@@ -1,4 +1,4 @@
-import OpenClawProtocol
+import ReecenbotProtocol
 
 /// Server-push messages from the gateway websocket.
 ///

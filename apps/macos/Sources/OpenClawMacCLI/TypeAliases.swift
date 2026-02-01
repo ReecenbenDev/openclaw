@@ -1,5 +1,5 @@
-import OpenClawKit
-import OpenClawProtocol
+import ReecenbotKit
+import ReecenbotProtocol
 
-typealias ProtoAnyCodable = OpenClawProtocol.AnyCodable
-typealias KitAnyCodable = OpenClawKit.AnyCodable
+typealias ProtoAnyCodable = ReecenbotProtocol.AnyCodable
+typealias KitAnyCodable = ReecenbotKit.AnyCodable

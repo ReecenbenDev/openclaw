@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite
 struct AnthropicAuthResolverTests {
@@ -21,7 +21,7 @@ struct AnthropicAuthResolverTests {
         let data = try JSONSerialization.data(withJSONObject: payload, options: [.prettyPrinted, .sortedKeys])
         try data.write(to: oauthFile, options: [.atomic])
 
-        let status = OpenClawOAuthStore.anthropicOAuthStatus(at: oauthFile)
+        let status = ReecenbotOAuthStore.anthropicOAuthStatus(at: oauthFile)
         let mode = AnthropicAuthResolver.resolve(environment: [
             "ANTHROPIC_API_KEY": "sk-ant-ignored",
         ], oauthStatus: status)

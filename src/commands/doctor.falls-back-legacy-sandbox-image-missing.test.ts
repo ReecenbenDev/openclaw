@@ -55,7 +55,7 @@ beforeEach(() => {
     killed: false,
   });
   ensureAuthProfileStore.mockReset().mockReturnValue({ version: 1, profiles: {} });
-  loadOpenClawPlugins.mockReset().mockReturnValue({ plugins: [], diagnostics: [] });
+  loadReecenbotPlugins.mockReset().mockReturnValue({ plugins: [], diagnostics: [] });
   migrateLegacyConfig.mockReset().mockImplementation((raw: unknown) => ({
     config: raw as Record<string, unknown>,
     changes: ["Moved routing.allowFrom → channels.whatsapp.allowFrom."],
@@ -79,7 +79,7 @@ beforeEach(() => {
   originalStateDir = process.env.OPENCLAW_STATE_DIR;
   originalUpdateInProgress = process.env.OPENCLAW_UPDATE_IN_PROGRESS;
   process.env.OPENCLAW_UPDATE_IN_PROGRESS = "1";
-  tempStateDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-doctor-state-"));
+  tempStateDir = fs.mkdtempSync(path.join(os.tmpdir(), "reecenbot-doctor-state-"));
   process.env.OPENCLAW_STATE_DIR = tempStateDir;
   fs.mkdirSync(path.join(tempStateDir, "agents", "main", "sessions"), {
     recursive: true,
@@ -132,7 +132,7 @@ const runCommandWithTimeout = vi.fn().mockResolvedValue({
 });
 
 const ensureAuthProfileStore = vi.fn().mockReturnValue({ version: 1, profiles: {} });
-const loadOpenClawPlugins = vi.fn().mockReturnValue({ plugins: [], diagnostics: [] });
+const loadReecenbotPlugins = vi.fn().mockReturnValue({ plugins: [], diagnostics: [] });
 
 const legacyReadConfigFileSnapshot = vi.fn().mockResolvedValue({
   path: "/tmp/openclaw.json",
@@ -175,7 +175,7 @@ vi.mock("../agents/skills-status.js", () => ({
 }));
 
 vi.mock("../plugins/loader.js", () => ({
-  loadOpenClawPlugins,
+  loadReecenbotPlugins,
 }));
 vi.mock("../config/config.js", async (importOriginal) => {
   const actual = await importOriginal();

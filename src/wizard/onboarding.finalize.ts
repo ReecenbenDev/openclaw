@@ -304,8 +304,8 @@ export async function finalizeOnboardingWizard(options: FinalizeOnboardingOption
       [
         "Gateway token: shared auth for the Gateway + Control UI.",
         "Stored in: ~/.openclaw/openclaw.json (gateway.auth.token) or OPENCLAW_GATEWAY_TOKEN.",
-        "Web UI stores a copy in this browser's localStorage (openclaw.control.settings.v1).",
-        `Get the tokenized link anytime: ${formatCliCommand("openclaw dashboard --no-open")}`,
+        "Web UI stores a copy in this browser's localStorage (reecenbot.control.settings.v1).",
+        `Get the tokenized link anytime: ${formatCliCommand("reecenbot dashboard --no-open")}`,
       ].join("\n"),
       "Token",
     );
@@ -335,7 +335,7 @@ export async function finalizeOnboardingWizard(options: FinalizeOnboardingOption
       if (seededInBackground) {
         await prompter.note(
           `Web UI seeded in the background. Open later with: ${formatCliCommand(
-            "openclaw dashboard --no-open",
+            "reecenbot dashboard --no-open",
           )}`,
           "Web UI",
         );
@@ -362,8 +362,8 @@ export async function finalizeOnboardingWizard(options: FinalizeOnboardingOption
         [
           `Dashboard link (with token): ${authedUrl}`,
           controlUiOpened
-            ? "Opened in your browser. Keep that tab to control OpenClaw."
-            : "Copy/paste this URL in a browser on this machine to control OpenClaw.",
+            ? "Opened in your browser. Keep that tab to control Reecenbot."
+            : "Copy/paste this URL in a browser on this machine to control Reecenbot.",
           controlUiOpenHint,
         ]
           .filter(Boolean)
@@ -372,7 +372,7 @@ export async function finalizeOnboardingWizard(options: FinalizeOnboardingOption
       );
     } else {
       await prompter.note(
-        `When you're ready: ${formatCliCommand("openclaw dashboard --no-open")}`,
+        `When you're ready: ${formatCliCommand("reecenbot dashboard --no-open")}`,
         "Later",
       );
     }
@@ -421,8 +421,8 @@ export async function finalizeOnboardingWizard(options: FinalizeOnboardingOption
       [
         `Dashboard link (with token): ${authedUrl}`,
         controlUiOpened
-          ? "Opened in your browser. Keep that tab to control OpenClaw."
-          : "Copy/paste this URL in a browser on this machine to control OpenClaw.",
+          ? "Opened in your browser. Keep that tab to control Reecenbot."
+          : "Copy/paste this URL in a browser on this machine to control Reecenbot.",
         controlUiOpenHint,
       ]
         .filter(Boolean)
@@ -447,10 +447,10 @@ export async function finalizeOnboardingWizard(options: FinalizeOnboardingOption
       : [
           "If you want your agent to be able to search the web, you’ll need an API key.",
           "",
-          "OpenClaw uses Brave Search for the `web_search` tool. Without a Brave Search API key, web search won’t work.",
+          "Reecenbot uses Brave Search for the `web_search` tool. Without a Brave Search API key, web search won’t work.",
           "",
           "Set it up interactively:",
-          `- Run: ${formatCliCommand("openclaw configure --section web")}`,
+          `- Run: ${formatCliCommand("reecenbot configure --section web")}`,
           "- Enable web_search and paste your Brave Search API key",
           "",
           "Alternative: set BRAVE_API_KEY in the Gateway environment (no config changes).",
@@ -460,15 +460,15 @@ export async function finalizeOnboardingWizard(options: FinalizeOnboardingOption
   );
 
   await prompter.note(
-    'What now: https://openclaw.ai/showcase ("What People Are Building").',
+    'What now: https://reecenbot.ai/showcase ("What People Are Building").',
     "What now",
   );
 
   await prompter.outro(
     controlUiOpened
-      ? "Onboarding complete. Dashboard opened with your token; keep that tab to control OpenClaw."
+      ? "Onboarding complete. Dashboard opened with your token; keep that tab to control Reecenbot."
       : seededInBackground
         ? "Onboarding complete. Web UI seeded in the background; open it anytime with the tokenized link above."
-        : "Onboarding complete. Use the tokenized dashboard link above to control OpenClaw.",
+        : "Onboarding complete. Use the tokenized dashboard link above to control Reecenbot.",
   );
 }

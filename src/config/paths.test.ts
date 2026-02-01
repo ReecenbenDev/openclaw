@@ -69,7 +69,7 @@ describe("state + config path candidates", () => {
   });
 
   it("prefers ~/.openclaw when it exists and legacy dir is missing", async () => {
-    const root = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-state-"));
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), "reecenbot-state-"));
     try {
       const newDir = path.join(root, ".openclaw");
       await fs.mkdir(newDir, { recursive: true });
@@ -81,13 +81,13 @@ describe("state + config path candidates", () => {
   });
 
   it("CONFIG_PATH prefers existing config when present", async () => {
-    const root = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-config-"));
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), "reecenbot-config-"));
     const previousHome = process.env.HOME;
     const previousUserProfile = process.env.USERPROFILE;
     const previousHomeDrive = process.env.HOMEDRIVE;
     const previousHomePath = process.env.HOMEPATH;
     const previousOpenClawConfig = process.env.OPENCLAW_CONFIG_PATH;
-    const previousOpenClawState = process.env.OPENCLAW_STATE_DIR;
+    const previousReecenbotState = process.env.OPENCLAW_STATE_DIR;
     try {
       const legacyDir = path.join(root, ".openclaw");
       await fs.mkdir(legacyDir, { recursive: true });
@@ -138,15 +138,15 @@ describe("state + config path candidates", () => {
       } else {
         process.env.OPENCLAW_CONFIG_PATH = previousOpenClawConfig;
       }
-      if (previousOpenClawState === undefined) {
+      if (previousReecenbotState === undefined) {
         delete process.env.OPENCLAW_STATE_DIR;
       } else {
-        process.env.OPENCLAW_STATE_DIR = previousOpenClawState;
+        process.env.OPENCLAW_STATE_DIR = previousReecenbotState;
       }
-      if (previousOpenClawState === undefined) {
+      if (previousReecenbotState === undefined) {
         delete process.env.OPENCLAW_STATE_DIR;
       } else {
-        process.env.OPENCLAW_STATE_DIR = previousOpenClawState;
+        process.env.OPENCLAW_STATE_DIR = previousReecenbotState;
       }
       await fs.rm(root, { recursive: true, force: true });
       vi.resetModules();
@@ -154,7 +154,7 @@ describe("state + config path candidates", () => {
   });
 
   it("respects state dir overrides when config is missing", async () => {
-    const root = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-config-override-"));
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), "reecenbot-config-override-"));
     try {
       const legacyDir = path.join(root, ".openclaw");
       await fs.mkdir(legacyDir, { recursive: true });

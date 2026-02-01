@@ -1,5 +1,5 @@
 import Testing
-@testable import OpenClawDiscovery
+@testable import ReecenbotDiscovery
 
 @Suite
 struct WideAreaGatewayDiscoveryTests {
@@ -21,15 +21,15 @@ struct WideAreaGatewayDiscoveryTests {
                 let nameserver = args.first(where: { $0.hasPrefix("@") }) ?? ""
                 if recordType == "PTR" {
                     if nameserver == "@100.123.224.76" {
-                        return "steipetacstudio-gateway._openclaw-gw._tcp.openclaw.internal.\n"
+                        return "steipetacstudio-gateway._openclaw-gw._tcp.reecenbot.internal.\n"
                     }
                     return ""
                 }
                 if recordType == "SRV" {
-                    return "0 0 18789 steipetacstudio.openclaw.internal."
+                    return "0 0 18789 steipetacstudio.reecenbot.internal."
                 }
                 if recordType == "TXT" {
-                    return "\"displayName=Peter\\226\\128\\153s Mac Studio (OpenClaw)\" \"gatewayPort=18789\" \"tailnetDns=peters-mac-studio-1.sheep-coho.ts.net\" \"cliPath=/Users/steipete/openclaw/src/entry.ts\""
+                    return "\"displayName=Peter\\226\\128\\153s Mac Studio (Reecenbot)\" \"gatewayPort=18789\" \"tailnetDns=peters-mac-studio-1.sheep-coho.ts.net\" \"cliPath=/Users/steipete/openclaw/src/entry.ts\""
                 }
                 return ""
             })
@@ -40,7 +40,7 @@ struct WideAreaGatewayDiscoveryTests {
 
         #expect(beacons.count == 1)
         let beacon = beacons[0]
-        let expectedDisplay = "Peter\u{2019}s Mac Studio (OpenClaw)"
+        let expectedDisplay = "Peter\u{2019}s Mac Studio (Reecenbot)"
         #expect(beacon.displayName == expectedDisplay)
         #expect(beacon.port == 18789)
         #expect(beacon.gatewayPort == 18789)

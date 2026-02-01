@@ -1,5 +1,5 @@
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite(.serialized) struct VoiceWakeForwarderTests {
     @Test func prefixedTranscriptUsesMachineName() {

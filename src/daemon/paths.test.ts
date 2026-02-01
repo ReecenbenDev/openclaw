@@ -19,17 +19,17 @@ describe("resolveGatewayStateDir", () => {
   });
 
   it("uses OPENCLAW_STATE_DIR when provided", () => {
-    const env = { HOME: "/Users/test", OPENCLAW_STATE_DIR: "/var/lib/openclaw" };
-    expect(resolveGatewayStateDir(env)).toBe(path.resolve("/var/lib/openclaw"));
+    const env = { HOME: "/Users/test", OPENCLAW_STATE_DIR: "/var/lib/reecenbot" };
+    expect(resolveGatewayStateDir(env)).toBe(path.resolve("/var/lib/reecenbot"));
   });
 
   it("expands ~ in OPENCLAW_STATE_DIR", () => {
-    const env = { HOME: "/Users/test", OPENCLAW_STATE_DIR: "~/openclaw-state" };
-    expect(resolveGatewayStateDir(env)).toBe(path.resolve("/Users/test/openclaw-state"));
+    const env = { HOME: "/Users/test", OPENCLAW_STATE_DIR: "~/reecenbot-state" };
+    expect(resolveGatewayStateDir(env)).toBe(path.resolve("/Users/test/reecenbot-state"));
   });
 
   it("preserves Windows absolute paths without HOME", () => {
-    const env = { OPENCLAW_STATE_DIR: "C:\\State\\openclaw" };
-    expect(resolveGatewayStateDir(env)).toBe("C:\\State\\openclaw");
+    const env = { OPENCLAW_STATE_DIR: "C:\\State\\reecenbot" };
+    expect(resolveGatewayStateDir(env)).toBe("C:\\State\\reecenbot");
   });
 });

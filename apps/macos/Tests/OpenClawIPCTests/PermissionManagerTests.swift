@@ -1,7 +1,7 @@
-import OpenClawIPC
+import ReecenbotIPC
 import CoreLocation
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite(.serialized)
 @MainActor

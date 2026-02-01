@@ -1,7 +1,7 @@
 {
   "name": "@openclaw/imessage",
   "version": "2026.1.30",
-  "description": "OpenClaw iMessage channel plugin",
+  "description": "Reecenbot iMessage channel plugin",
   "type": "module",
   "devDependencies": {
     "openclaw": "workspace:*"

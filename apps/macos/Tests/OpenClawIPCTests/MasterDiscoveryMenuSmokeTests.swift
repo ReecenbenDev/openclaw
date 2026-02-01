@@ -1,7 +1,7 @@
-import OpenClawDiscovery
+import ReecenbotDiscovery
 import SwiftUI
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite(.serialized)
 @MainActor

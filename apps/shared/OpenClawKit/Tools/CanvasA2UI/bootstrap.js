@@ -151,7 +151,7 @@ const openclawTheme = {
   },
 };
 
-class OpenClawA2UIHost extends LitElement {
+class ReecenbotA2UIHost extends LitElement {
   static properties = {
     surfaces: { state: true },
     pendingAction: { state: true },
@@ -280,7 +280,7 @@ class OpenClawA2UIHost extends LitElement {
       reset: () => this.reset(),
       getSurfaces: () => Array.from(this.#processor.getSurfaces().keys()),
     };
-    globalThis.openclawA2UI = api;
+    globalThis.reecenbotA2UI = api;
     this.addEventListener("a2uiaction", (evt) => this.#handleA2UIAction(evt));
     this.#statusListener = (evt) => this.#handleActionStatus(evt);
     for (const eventName of ["openclaw:a2ui-action-status"]) {
@@ -400,12 +400,12 @@ class OpenClawA2UIHost extends LitElement {
     globalThis.__openclawLastA2UIAction = userAction;
 
     const handler =
-      globalThis.webkit?.messageHandlers?.openclawCanvasA2UIAction ??
-      globalThis.openclawCanvasA2UIAction;
+      globalThis.webkit?.messageHandlers?.reecenbotCanvasA2UIAction ??
+      globalThis.reecenbotCanvasA2UIAction;
     if (handler?.postMessage) {
       try {
         // WebKit message handlers support structured objects; Android's JS interface expects strings.
-        if (handler === globalThis.openclawCanvasA2UIAction) {
+        if (handler === globalThis.reecenbotCanvasA2UIAction) {
           handler.postMessage(JSON.stringify({ userAction }));
         } else {
           handler.postMessage({ userAction });
@@ -486,5 +486,5 @@ class OpenClawA2UIHost extends LitElement {
 }
 
 if (!customElements.get("openclaw-a2ui-host")) {
-  customElements.define("openclaw-a2ui-host", OpenClawA2UIHost);
+  customElements.define("openclaw-a2ui-host", ReecenbotA2UIHost);
 }

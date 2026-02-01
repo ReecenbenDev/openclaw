@@ -1,6 +1,6 @@
-import OpenClawKit
+import ReecenbotKit
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite struct IOSGatewayChatTransportTests {
     @Test func requestsFailFastWhenGatewayNotConnected() async {

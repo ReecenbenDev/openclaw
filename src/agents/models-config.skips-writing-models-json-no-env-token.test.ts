@@ -5,7 +5,7 @@ import type { OpenClawConfig } from "../config/config.js";
 import { withTempHome as withTempHomeBase } from "../../test/helpers/temp-home.js";
 
 async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
-  return withTempHomeBase(fn, { prefix: "openclaw-models-" });
+  return withTempHomeBase(fn, { prefix: "reecenbot-models-" });
 }
 
 const MODELS_CONFIG: OpenClawConfig = {
@@ -66,10 +66,10 @@ describe("models-config", () => {
 
       try {
         vi.resetModules();
-        const { ensureOpenClawModelsJson } = await import("./models-config.js");
+        const { ensureReecenbotModelsJson } = await import("./models-config.js");
 
         const agentDir = path.join(home, "agent-empty");
-        const result = await ensureOpenClawModelsJson(
+        const result = await ensureReecenbotModelsJson(
           {
             models: { providers: {} },
           },
@@ -130,12 +130,12 @@ describe("models-config", () => {
   it("writes models.json for configured providers", async () => {
     await withTempHome(async () => {
       vi.resetModules();
-      const { ensureOpenClawModelsJson } = await import("./models-config.js");
-      const { resolveOpenClawAgentDir } = await import("./agent-paths.js");
+      const { ensureReecenbotModelsJson } = await import("./models-config.js");
+      const { resolveReecenbotAgentDir } = await import("./agent-paths.js");
 
-      await ensureOpenClawModelsJson(MODELS_CONFIG);
+      await ensureReecenbotModelsJson(MODELS_CONFIG);
 
-      const modelPath = path.join(resolveOpenClawAgentDir(), "models.json");
+      const modelPath = path.join(resolveReecenbotAgentDir(), "models.json");
       const raw = await fs.readFile(modelPath, "utf8");
       const parsed = JSON.parse(raw) as {
         providers: Record<string, { baseUrl?: string }>;
@@ -150,12 +150,12 @@ describe("models-config", () => {
       const prevKey = process.env.MINIMAX_API_KEY;
       process.env.MINIMAX_API_KEY = "sk-minimax-test";
       try {
-        const { ensureOpenClawModelsJson } = await import("./models-config.js");
-        const { resolveOpenClawAgentDir } = await import("./agent-paths.js");
+        const { ensureReecenbotModelsJson } = await import("./models-config.js");
+        const { resolveReecenbotAgentDir } = await import("./agent-paths.js");
 
-        await ensureOpenClawModelsJson({});
+        await ensureReecenbotModelsJson({});
 
-        const modelPath = path.join(resolveOpenClawAgentDir(), "models.json");
+        const modelPath = path.join(resolveReecenbotAgentDir(), "models.json");
         const raw = await fs.readFile(modelPath, "utf8");
         const parsed = JSON.parse(raw) as {
           providers: Record<
@@ -187,12 +187,12 @@ describe("models-config", () => {
       const prevKey = process.env.SYNTHETIC_API_KEY;
       process.env.SYNTHETIC_API_KEY = "sk-synthetic-test";
       try {
-        const { ensureOpenClawModelsJson } = await import("./models-config.js");
-        const { resolveOpenClawAgentDir } = await import("./agent-paths.js");
+        const { ensureReecenbotModelsJson } = await import("./models-config.js");
+        const { resolveReecenbotAgentDir } = await import("./agent-paths.js");
 
-        await ensureOpenClawModelsJson({});
+        await ensureReecenbotModelsJson({});
 
-        const modelPath = path.join(resolveOpenClawAgentDir(), "models.json");
+        const modelPath = path.join(resolveReecenbotAgentDir(), "models.json");
         const raw = await fs.readFile(modelPath, "utf8");
         const parsed = JSON.parse(raw) as {
           providers: Record<

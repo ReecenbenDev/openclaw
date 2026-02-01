@@ -1,13 +1,13 @@
-package ai.openclaw.android
+package ai.reecenbot.android
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import ai.openclaw.android.gateway.GatewayEndpoint
-import ai.openclaw.android.chat.OutgoingAttachment
-import ai.openclaw.android.node.CameraCaptureManager
-import ai.openclaw.android.node.CanvasController
-import ai.openclaw.android.node.ScreenRecordManager
-import ai.openclaw.android.node.SmsManager
+import ai.reecenbot.android.gateway.GatewayEndpoint
+import ai.reecenbot.android.chat.OutgoingAttachment
+import ai.reecenbot.android.node.CameraCaptureManager
+import ai.reecenbot.android.node.CanvasController
+import ai.reecenbot.android.node.ScreenRecordManager
+import ai.reecenbot.android.node.SmsManager
 import kotlinx.coroutines.flow.StateFlow
 
 class MainViewModel(app: Application) : AndroidViewModel(app) {

@@ -4,12 +4,12 @@ description: "Save session context to memory when /new command is issued"
 homepage: https://docs.openclaw.ai/hooks#session-memory
 metadata:
   {
-    "openclaw":
+    "reecenbot":
       {
         "emoji": "💾",
         "events": ["command:new"],
         "requires": { "config": ["workspace.dir"] },
-        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with OpenClaw" }],
+        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with Reecenbot" }],
       },
   }
 ---
@@ -91,7 +91,7 @@ The hook automatically:
 To disable this hook:
 
 ```bash
-openclaw hooks disable session-memory
+reecenbot hooks disable session-memory
 ```
 
 Or remove it from your config:

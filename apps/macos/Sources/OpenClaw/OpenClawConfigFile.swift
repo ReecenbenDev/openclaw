@@ -1,19 +1,19 @@
-import OpenClawProtocol
+import ReecenbotProtocol
 import Foundation
 
-enum OpenClawConfigFile {
-    private static let logger = Logger(subsystem: "ai.openclaw", category: "config")
+enum ReecenbotConfigFile {
+    private static let logger = Logger(subsystem: "ai.reecenbot", category: "config")
 
     static func url() -> URL {
-        OpenClawPaths.configURL
+        ReecenbotPaths.configURL
     }
 
     static func stateDirURL() -> URL {
-        OpenClawPaths.stateDirURL
+        ReecenbotPaths.stateDirURL
     }
 
     static func defaultWorkspaceURL() -> URL {
-        OpenClawPaths.workspaceURL
+        ReecenbotPaths.workspaceURL
     }
 
     static func loadDict() -> [String: Any] {

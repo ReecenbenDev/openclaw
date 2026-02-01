@@ -5,7 +5,7 @@ import type { OpenClawConfig } from "../config/config.js";
 import { withTempHome as withTempHomeBase } from "../../test/helpers/temp-home.js";
 
 async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
-  return withTempHomeBase(fn, { prefix: "openclaw-models-" });
+  return withTempHomeBase(fn, { prefix: "reecenbot-models-" });
 }
 
 const _MODELS_CONFIG: OpenClawConfig = {
@@ -46,8 +46,8 @@ describe("models-config", () => {
   it("normalizes gemini 3 ids to preview for google providers", async () => {
     await withTempHome(async () => {
       vi.resetModules();
-      const { ensureOpenClawModelsJson } = await import("./models-config.js");
-      const { resolveOpenClawAgentDir } = await import("./agent-paths.js");
+      const { ensureReecenbotModelsJson } = await import("./models-config.js");
+      const { resolveReecenbotAgentDir } = await import("./agent-paths.js");
 
       const cfg: OpenClawConfig = {
         models: {
@@ -83,9 +83,9 @@ describe("models-config", () => {
         },
       };
 
-      await ensureOpenClawModelsJson(cfg);
+      await ensureReecenbotModelsJson(cfg);
 
-      const modelPath = path.join(resolveOpenClawAgentDir(), "models.json");
+      const modelPath = path.join(resolveReecenbotAgentDir(), "models.json");
       const raw = await fs.readFile(modelPath, "utf8");
       const parsed = JSON.parse(raw) as {
         providers: Record<string, { models: Array<{ id: string }> }>;

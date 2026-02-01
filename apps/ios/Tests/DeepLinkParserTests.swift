@@ -1,4 +1,4 @@
-import OpenClawKit
+import ReecenbotKit
 import Foundation
 import Testing
 
@@ -21,7 +21,7 @@ import Testing
             key: nil)))
     }
 
-    @Test func parseRejectsNonOpenClawScheme() {
+    @Test func parseRejectsNonReecenbotScheme() {
         let url = URL(string: "https://example.com/agent?message=hi")!
         #expect(DeepLinkParser.parse(url) == nil)
     }

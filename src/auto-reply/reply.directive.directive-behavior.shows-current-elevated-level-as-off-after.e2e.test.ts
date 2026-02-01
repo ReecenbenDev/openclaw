@@ -30,7 +30,7 @@ async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
         OPENCLAW_AGENT_DIR: (home) => path.join(home, ".openclaw", "agent"),
         PI_CODING_AGENT_DIR: (home) => path.join(home, ".openclaw", "agent"),
       },
-      prefix: "openclaw-reply-",
+      prefix: "reecenbot-reply-",
     },
   );
 }
@@ -79,7 +79,7 @@ describe("directive behavior", () => {
           agents: {
             defaults: {
               model: "anthropic/claude-opus-4-5",
-              workspace: path.join(home, "openclaw"),
+              workspace: path.join(home, "reecenbot"),
               elevatedDefault: "on",
             },
           },
@@ -107,7 +107,7 @@ describe("directive behavior", () => {
           agents: {
             defaults: {
               model: "anthropic/claude-opus-4-5",
-              workspace: path.join(home, "openclaw"),
+              workspace: path.join(home, "reecenbot"),
               elevatedDefault: "on",
             },
           },
@@ -135,7 +135,7 @@ describe("directive behavior", () => {
         agents: {
           defaults: {
             model: "anthropic/claude-opus-4-5",
-            workspace: path.join(home, "openclaw"),
+            workspace: path.join(home, "reecenbot"),
             elevatedDefault: "on",
           },
         },
@@ -215,7 +215,7 @@ describe("directive behavior", () => {
           agents: {
             defaults: {
               model: "anthropic/claude-opus-4-5",
-              workspace: path.join(home, "openclaw"),
+              workspace: path.join(home, "reecenbot"),
             },
             list: [
               {

@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "OpenClaw",
+  "name": "Reecenbot",
   "theme": "mint",
   "logo": {
     "light": "/assets/pixel-lobster.svg",
@@ -13,11 +13,11 @@
   "topbarLinks": [
     {
       "name": "GitHub",
-      "url": "https://github.com/openclaw/openclaw"
+      "url": "https://github.com/reecenbot/reecenbot"
     },
     {
       "name": "Releases",
-      "url": "https://github.com/openclaw/openclaw/releases"
+      "url": "https://github.com/reecenbot/reecenbot/releases"
     }
   ],
   "redirects": [
@@ -359,15 +359,15 @@
     },
     {
       "source": "/clawd",
-      "destination": "/start/openclaw"
+      "destination": "/start/reecenbot"
     },
     {
       "source": "/start/clawd",
-      "destination": "/start/openclaw"
+      "destination": "/start/reecenbot"
     },
     {
       "source": "/start/clawd/",
-      "destination": "/start/openclaw"
+      "destination": "/start/reecenbot"
     },
     {
       "source": "/clawhub",
@@ -848,7 +848,7 @@
           "start/wizard",
           "start/setup",
           "start/pairing",
-          "start/openclaw",
+          "start/reecenbot",
           "start/showcase",
           "start/hubs",
           "start/onboarding",

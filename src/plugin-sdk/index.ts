@@ -59,9 +59,9 @@ export type {
 } from "../channels/plugins/types.js";
 export type { ChannelConfigSchema, ChannelPlugin } from "../channels/plugins/types.plugin.js";
 export type {
-  OpenClawPluginApi,
-  OpenClawPluginService,
-  OpenClawPluginServiceContext,
+  ReecenbotPluginApi,
+  ReecenbotPluginService,
+  ReecenbotPluginServiceContext,
 } from "../plugins/types.js";
 export type {
   GatewayRequestHandler,

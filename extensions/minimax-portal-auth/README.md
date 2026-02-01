@@ -1,4 +1,4 @@
-# MiniMax OAuth (OpenClaw plugin)
+# MiniMax OAuth (Reecenbot plugin)
 
 OAuth provider plugin for **MiniMax** (OAuth).
 

@@ -86,7 +86,7 @@ function findPackageRoot(startDir: string, name: string): string | null {
   }
 }
 
-function resolveOpenClawRoot(): string {
+function resolveReecenbotRoot(): string {
   if (coreRootCache) {
     return coreRootCache;
   }
@@ -122,7 +122,7 @@ function resolveOpenClawRoot(): string {
 }
 
 async function importCoreModule<T>(relativePath: string): Promise<T> {
-  const root = resolveOpenClawRoot();
+  const root = resolveReecenbotRoot();
   const distPath = path.join(root, "dist", relativePath);
   if (!fs.existsSync(distPath)) {
     throw new Error(

@@ -1,9 +1,9 @@
 import AppKit
-import OpenClawProtocol
+import ReecenbotProtocol
 import SwiftUI
 import Testing
 
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite(.serialized)
 @MainActor

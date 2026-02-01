@@ -40,7 +40,7 @@ describe("docker-setup.sh", () => {
       return;
     }
 
-    const rootDir = await mkdtemp(join(tmpdir(), "openclaw-docker-setup-"));
+    const rootDir = await mkdtemp(join(tmpdir(), "reecenbot-docker-setup-"));
     const scriptPath = join(rootDir, "docker-setup.sh");
     const dockerfilePath = join(rootDir, "Dockerfile");
     const composePath = join(rootDir, "docker-compose.yml");
@@ -52,7 +52,7 @@ describe("docker-setup.sh", () => {
     await writeFile(dockerfilePath, "FROM scratch\n");
     await writeFile(
       composePath,
-      "services:\n  openclaw-gateway:\n    image: noop\n  openclaw-cli:\n    image: noop\n",
+      "services:\n  reecenbot-gateway:\n    image: noop\n  reecenbot-cli:\n    image: noop\n",
     );
     await writeDockerStub(binDir, logPath);
 
@@ -62,7 +62,7 @@ describe("docker-setup.sh", () => {
       DOCKER_STUB_LOG: logPath,
       OPENCLAW_GATEWAY_TOKEN: "test-token",
       OPENCLAW_CONFIG_DIR: join(rootDir, "config"),
-      OPENCLAW_WORKSPACE_DIR: join(rootDir, "openclaw"),
+      OPENCLAW_WORKSPACE_DIR: join(rootDir, "reecenbot"),
     };
     delete env.OPENCLAW_DOCKER_APT_PACKAGES;
     delete env.OPENCLAW_EXTRA_MOUNTS;
@@ -90,7 +90,7 @@ describe("docker-setup.sh", () => {
       return;
     }
 
-    const rootDir = await mkdtemp(join(tmpdir(), "openclaw-docker-setup-"));
+    const rootDir = await mkdtemp(join(tmpdir(), "reecenbot-docker-setup-"));
     const scriptPath = join(rootDir, "docker-setup.sh");
     const dockerfilePath = join(rootDir, "Dockerfile");
     const composePath = join(rootDir, "docker-compose.yml");
@@ -102,7 +102,7 @@ describe("docker-setup.sh", () => {
     await writeFile(dockerfilePath, "FROM scratch\n");
     await writeFile(
       composePath,
-      "services:\n  openclaw-gateway:\n    image: noop\n  openclaw-cli:\n    image: noop\n",
+      "services:\n  reecenbot-gateway:\n    image: noop\n  reecenbot-cli:\n    image: noop\n",
     );
     await writeDockerStub(binDir, logPath);
 
@@ -113,7 +113,7 @@ describe("docker-setup.sh", () => {
       OPENCLAW_DOCKER_APT_PACKAGES: "ffmpeg build-essential",
       OPENCLAW_GATEWAY_TOKEN: "test-token",
       OPENCLAW_CONFIG_DIR: join(rootDir, "config"),
-      OPENCLAW_WORKSPACE_DIR: join(rootDir, "openclaw"),
+      OPENCLAW_WORKSPACE_DIR: join(rootDir, "reecenbot"),
       OPENCLAW_EXTRA_MOUNTS: "",
       OPENCLAW_HOME_VOLUME: "",
     };

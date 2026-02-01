@@ -1,8 +1,8 @@
-import OpenClawKit
+import ReecenbotKit
 import Foundation
 import Testing
-@testable import OpenClaw
-@testable import OpenClawIPC
+@testable import Reecenbot
+@testable import ReecenbotIPC
 
 private final class FakeWebSocketTask: WebSocketTasking, @unchecked Sendable {
     var state: URLSessionTask.State = .running

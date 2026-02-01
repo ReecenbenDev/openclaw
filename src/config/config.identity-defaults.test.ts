@@ -131,7 +131,7 @@ describe("config identity defaults", () => {
                     theme: "space lobster",
                     emoji: "🦞",
                   },
-                  groupChat: { mentionPatterns: ["@openclaw"] },
+                  groupChat: { mentionPatterns: ["@reecenbot"] },
                 },
               ],
             },
@@ -150,7 +150,7 @@ describe("config identity defaults", () => {
       const cfg = loadConfig();
 
       expect(cfg.messages?.responsePrefix).toBe("✅");
-      expect(cfg.agents?.list?.[0]?.groupChat?.mentionPatterns).toEqual(["@openclaw"]);
+      expect(cfg.agents?.list?.[0]?.groupChat?.mentionPatterns).toEqual(["@reecenbot"]);
     });
   });
 
@@ -163,7 +163,7 @@ describe("config identity defaults", () => {
         JSON.stringify(
           {
             messages: {
-              messagePrefix: "[openclaw]",
+              messagePrefix: "[reecenbot]",
               responsePrefix: "🦞",
             },
             channels: {
@@ -327,7 +327,7 @@ describe("config identity defaults", () => {
                 {
                   id: "main",
                   identity: {
-                    name: "OpenClaw",
+                    name: "Reecenbot",
                     theme: "space lobster",
                     emoji: "🦞",
                   },

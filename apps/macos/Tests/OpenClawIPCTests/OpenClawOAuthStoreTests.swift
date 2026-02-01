@@ -1,19 +1,19 @@
 import Foundation
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite
-struct OpenClawOAuthStoreTests {
+struct ReecenbotOAuthStoreTests {
     @Test
     func returnsMissingWhenFileAbsent() {
         let url = FileManager().temporaryDirectory
             .appendingPathComponent("openclaw-oauth-\(UUID().uuidString)")
             .appendingPathComponent("oauth.json")
-        #expect(OpenClawOAuthStore.anthropicOAuthStatus(at: url) == .missingFile)
+        #expect(ReecenbotOAuthStore.anthropicOAuthStatus(at: url) == .missingFile)
     }
 
     @Test
-    func usesEnvOverrideForOpenClawOAuthDir() throws {
+    func usesEnvOverrideForReecenbotOAuthDir() throws {
         let key = "OPENCLAW_OAUTH_DIR"
         let previous = ProcessInfo.processInfo.environment[key]
         defer {
@@ -28,7 +28,7 @@ struct OpenClawOAuthStoreTests {
             .appendingPathComponent("openclaw-oauth-\(UUID().uuidString)", isDirectory: true)
         setenv(key, dir.path, 1)
 
-        #expect(OpenClawOAuthStore.oauthDir().standardizedFileURL == dir.standardizedFileURL)
+        #expect(ReecenbotOAuthStore.oauthDir().standardizedFileURL == dir.standardizedFileURL)
     }
 
     @Test
@@ -42,7 +42,7 @@ struct OpenClawOAuthStoreTests {
             ],
         ])
 
-        #expect(OpenClawOAuthStore.anthropicOAuthStatus(at: url).isConnected)
+        #expect(ReecenbotOAuthStore.anthropicOAuthStatus(at: url).isConnected)
     }
 
     @Test
@@ -55,7 +55,7 @@ struct OpenClawOAuthStoreTests {
             ],
         ])
 
-        #expect(OpenClawOAuthStore.anthropicOAuthStatus(at: url).isConnected)
+        #expect(ReecenbotOAuthStore.anthropicOAuthStatus(at: url).isConnected)
     }
 
     @Test
@@ -68,7 +68,7 @@ struct OpenClawOAuthStoreTests {
             ],
         ])
 
-        #expect(OpenClawOAuthStore.anthropicOAuthStatus(at: url) == .missingProviderEntry)
+        #expect(ReecenbotOAuthStore.anthropicOAuthStatus(at: url) == .missingProviderEntry)
     }
 
     @Test
@@ -81,7 +81,7 @@ struct OpenClawOAuthStoreTests {
             ],
         ])
 
-        #expect(OpenClawOAuthStore.anthropicOAuthStatus(at: url) == .missingTokens)
+        #expect(ReecenbotOAuthStore.anthropicOAuthStatus(at: url) == .missingTokens)
     }
 
     private func writeOAuthFile(_ json: [String: Any]) throws -> URL {

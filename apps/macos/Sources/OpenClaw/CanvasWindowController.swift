@@ -1,6 +1,6 @@
 import AppKit
-import OpenClawIPC
-import OpenClawKit
+import ReecenbotIPC
+import ReecenbotKit
 import Foundation
 import WebKit
 
@@ -89,12 +89,12 @@ final class CanvasWindowController: NSWindowController, WKNavigationDelegate, NS
                   ...(context.length ? { context } : {}),
                 };
 
-                const handler = globalThis.webkit?.messageHandlers?.openclawCanvasA2UIAction;
+                const handler = globalThis.webkit?.messageHandlers?.reecenbotCanvasA2UIAction;
 
                 // If the bundled A2UI shell is present, let it forward actions so we keep its richer
                 // context resolution (data model path lookups, surface detection, etc.).
                 const hasBundledA2UIHost =
-                  !!globalThis.openclawA2UI ||
+                  !!globalThis.reecenbotA2UI ||
                   !!document.querySelector('openclaw-a2ui-host');
                 if (hasBundledA2UIHost && handler?.postMessage) return;
 

@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package ai.openclaw.android
+package ai.reecenbot.android
 
 import android.content.Context
 import android.content.SharedPreferences

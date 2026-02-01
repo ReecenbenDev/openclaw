@@ -20,7 +20,7 @@ vi.mock("../runtime.js", () => ({
 
 describe("browser extension install", () => {
   it("installs into the state dir (never node_modules)", async () => {
-    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-ext-"));
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "reecenbot-ext-"));
     const { installChromeExtension } = await import("./browser-cli-extension.js");
 
     const sourceDir = path.resolve(process.cwd(), "assets/chrome-extension");
@@ -33,7 +33,7 @@ describe("browser extension install", () => {
 
   it("copies extension path to clipboard", async () => {
     const prev = process.env.OPENCLAW_STATE_DIR;
-    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-ext-path-"));
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "reecenbot-ext-path-"));
     process.env.OPENCLAW_STATE_DIR = tmp;
 
     try {

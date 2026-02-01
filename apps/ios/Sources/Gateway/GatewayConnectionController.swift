@@ -1,4 +1,4 @@
-import OpenClawKit
+import ReecenbotKit
 import Darwin
 import Foundation
 import Network
@@ -304,51 +304,51 @@ final class GatewayConnectionController {
     }
 
     private func currentCaps() -> [String] {
-        var caps = [OpenClawCapability.canvas.rawValue, OpenClawCapability.screen.rawValue]
+        var caps = [ReecenbotCapability.canvas.rawValue, ReecenbotCapability.screen.rawValue]
 
         // Default-on: if the key doesn't exist yet, treat it as enabled.
         let cameraEnabled =
             UserDefaults.standard.object(forKey: "camera.enabled") == nil
                 ? true
                 : UserDefaults.standard.bool(forKey: "camera.enabled")
-        if cameraEnabled { caps.append(OpenClawCapability.camera.rawValue) }
+        if cameraEnabled { caps.append(ReecenbotCapability.camera.rawValue) }
 
         let voiceWakeEnabled = UserDefaults.standard.bool(forKey: VoiceWakePreferences.enabledKey)
-        if voiceWakeEnabled { caps.append(OpenClawCapability.voiceWake.rawValue) }
+        if voiceWakeEnabled { caps.append(ReecenbotCapability.voiceWake.rawValue) }
 
         let locationModeRaw = UserDefaults.standard.string(forKey: "location.enabledMode") ?? "off"
-        let locationMode = OpenClawLocationMode(rawValue: locationModeRaw) ?? .off
-        if locationMode != .off { caps.append(OpenClawCapability.location.rawValue) }
+        let locationMode = ReecenbotLocationMode(rawValue: locationModeRaw) ?? .off
+        if locationMode != .off { caps.append(ReecenbotCapability.location.rawValue) }
 
         return caps
     }
 
     private func currentCommands() -> [String] {
         var commands: [String] = [
-            OpenClawCanvasCommand.present.rawValue,
-            OpenClawCanvasCommand.hide.rawValue,
-            OpenClawCanvasCommand.navigate.rawValue,
-            OpenClawCanvasCommand.evalJS.rawValue,
-            OpenClawCanvasCommand.snapshot.rawValue,
-            OpenClawCanvasA2UICommand.push.rawValue,
-            OpenClawCanvasA2UICommand.pushJSONL.rawValue,
-            OpenClawCanvasA2UICommand.reset.rawValue,
-            OpenClawScreenCommand.record.rawValue,
-            OpenClawSystemCommand.notify.rawValue,
-            OpenClawSystemCommand.which.rawValue,
-            OpenClawSystemCommand.run.rawValue,
-            OpenClawSystemCommand.execApprovalsGet.rawValue,
-            OpenClawSystemCommand.execApprovalsSet.rawValue,
+            ReecenbotCanvasCommand.present.rawValue,
+            ReecenbotCanvasCommand.hide.rawValue,
+            ReecenbotCanvasCommand.navigate.rawValue,
+            ReecenbotCanvasCommand.evalJS.rawValue,
+            ReecenbotCanvasCommand.snapshot.rawValue,
+            ReecenbotCanvasA2UICommand.push.rawValue,
+            ReecenbotCanvasA2UICommand.pushJSONL.rawValue,
+            ReecenbotCanvasA2UICommand.reset.rawValue,
+            ReecenbotScreenCommand.record.rawValue,
+            ReecenbotSystemCommand.notify.rawValue,
+            ReecenbotSystemCommand.which.rawValue,
+            ReecenbotSystemCommand.run.rawValue,
+            ReecenbotSystemCommand.execApprovalsGet.rawValue,
+            ReecenbotSystemCommand.execApprovalsSet.rawValue,
         ]
 
         let caps = Set(self.currentCaps())
-        if caps.contains(OpenClawCapability.camera.rawValue) {
-            commands.append(OpenClawCameraCommand.list.rawValue)
-            commands.append(OpenClawCameraCommand.snap.rawValue)
-            commands.append(OpenClawCameraCommand.clip.rawValue)
+        if caps.contains(ReecenbotCapability.camera.rawValue) {
+            commands.append(ReecenbotCameraCommand.list.rawValue)
+            commands.append(ReecenbotCameraCommand.snap.rawValue)
+            commands.append(ReecenbotCameraCommand.clip.rawValue)
         }
-        if caps.contains(OpenClawCapability.location.rawValue) {
-            commands.append(OpenClawLocationCommand.get.rawValue)
+        if caps.contains(ReecenbotCapability.location.rawValue) {
+            commands.append(ReecenbotLocationCommand.get.rawValue)
         }
 
         return commands

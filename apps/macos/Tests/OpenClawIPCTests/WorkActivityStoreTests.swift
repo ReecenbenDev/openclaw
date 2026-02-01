@@ -1,7 +1,7 @@
-import OpenClawProtocol
+import ReecenbotProtocol
 import Foundation
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite
 @MainActor

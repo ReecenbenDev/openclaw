@@ -1,6 +1,6 @@
 # Bundled Hooks
 
-This directory contains hooks that ship with OpenClaw. These hooks are automatically discovered and can be enabled/disabled via CLI or configuration.
+This directory contains hooks that ship with Reecenbot. These hooks are automatically discovered and can be enabled/disabled via CLI or configuration.
 
 ## Available Hooks
 
@@ -15,7 +15,7 @@ Automatically saves session context to memory when you issue `/new`.
 **Enable**:
 
 ```bash
-openclaw hooks enable session-memory
+reecenbot hooks enable session-memory
 ```
 
 ### 📝 command-logger
@@ -29,7 +29,7 @@ Logs all command events to a centralized audit file.
 **Enable**:
 
 ```bash
-openclaw hooks enable command-logger
+reecenbot hooks enable command-logger
 ```
 
 ### 😈 soul-evil
@@ -44,7 +44,7 @@ Swaps injected `SOUL.md` content with `SOUL_EVIL.md` during a purge window or by
 **Enable**:
 
 ```bash
-openclaw hooks enable soul-evil
+reecenbot hooks enable soul-evil
 ```
 
 ### 🚀 boot-md
@@ -58,7 +58,7 @@ Runs `BOOT.md` whenever the gateway starts (after channels start).
 **Enable**:
 
 ```bash
-openclaw hooks enable boot-md
+reecenbot hooks enable boot-md
 ```
 
 ## Hook Structure
@@ -84,7 +84,7 @@ name: my-hook
 description: "Short description"
 homepage: https://docs.openclaw.ai/hooks#my-hook
 metadata:
-  { "openclaw": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
+  { "reecenbot": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
 ---
 # Hook Title
 
@@ -117,26 +117,26 @@ Custom hooks follow the same structure as bundled hooks.
 List all hooks:
 
 ```bash
-openclaw hooks list
+reecenbot hooks list
 ```
 
 Show hook details:
 
 ```bash
-openclaw hooks info session-memory
+reecenbot hooks info session-memory
 ```
 
 Check hook status:
 
 ```bash
-openclaw hooks check
+reecenbot hooks check
 ```
 
 Enable/disable:
 
 ```bash
-openclaw hooks enable session-memory
-openclaw hooks disable command-logger
+reecenbot hooks enable session-memory
+reecenbot hooks disable command-logger
 ```
 
 ## Configuration
@@ -214,8 +214,8 @@ export default myHandler;
 Test your hooks by:
 
 1. Place hook in workspace hooks directory
-2. Restart gateway: `pkill -9 -f 'openclaw.*gateway' && pnpm openclaw gateway`
-3. Enable the hook: `openclaw hooks enable my-hook`
+2. Restart gateway: `pkill -9 -f 'reecenbot.*gateway' && pnpm reecenbot gateway`
+3. Enable the hook: `reecenbot hooks enable my-hook`
 4. Trigger the event (e.g., send `/new` command)
 5. Check gateway logs for hook execution
 

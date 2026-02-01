@@ -1,4 +1,4 @@
-# Google Gemini CLI Auth (OpenClaw plugin)
+# Google Gemini CLI Auth (Reecenbot plugin)
 
 OAuth provider plugin for **Gemini CLI** (Google Code Assist).
 

@@ -1,4 +1,4 @@
-import OpenClawIPC
+import ReecenbotIPC
 import Foundation
 import OSLog
 
@@ -68,7 +68,7 @@ struct GatewayCommandResolution {
 }
 
 enum GatewayEnvironment {
-    private static let logger = Logger(subsystem: "ai.openclaw", category: "gateway.env")
+    private static let logger = Logger(subsystem: "ai.reecenbot", category: "gateway.env")
     private static let supportedBindModes: Set<String> = ["loopback", "tailnet", "lan", "auto"]
 
     static func gatewayPort() -> Int {
@@ -76,7 +76,7 @@ enum GatewayEnvironment {
             let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
             if let parsed = Int(trimmed), parsed > 0 { return parsed }
         }
-        if let configPort = OpenClawConfigFile.gatewayPort(), configPort > 0 {
+        if let configPort = ReecenbotConfigFile.gatewayPort(), configPort > 0 {
             return configPort
         }
         let stored = UserDefaults.standard.integer(forKey: "gatewayPort")
@@ -123,7 +123,7 @@ enum GatewayEnvironment {
                 requiredGateway: expectedString,
                 message: RuntimeLocator.describeFailure(err))
         case let .success(runtime):
-            let gatewayBin = CommandResolver.openclawExecutable()
+            let gatewayBin = CommandResolver.reecenbotExecutable()
 
             if gatewayBin == nil, projectEntrypoint == nil {
                 return GatewayEnvironmentStatus(
@@ -181,7 +181,7 @@ enum GatewayEnvironment {
         let projectRoot = CommandResolver.projectRoot()
         let projectEntrypoint = CommandResolver.gatewayEntrypoint(in: projectRoot)
         let status = self.check()
-        let gatewayBin = CommandResolver.openclawExecutable()
+        let gatewayBin = CommandResolver.reecenbotExecutable()
         let runtime = RuntimeLocator.resolve(searchPaths: CommandResolver.preferredPaths())
 
         guard case .ok = status.kind else {
@@ -217,7 +217,7 @@ enum GatewayEnvironment {
             }
         }
 
-        let root = OpenClawConfigFile.loadDict()
+        let root = ReecenbotConfigFile.loadDict()
         if let gateway = root["gateway"] as? [String: Any],
            let bind = gateway["bind"] as? String
         {

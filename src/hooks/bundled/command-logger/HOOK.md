@@ -4,11 +4,11 @@ description: "Log all command events to a centralized audit file"
 homepage: https://docs.openclaw.ai/hooks#command-logger
 metadata:
   {
-    "openclaw":
+    "reecenbot":
       {
         "emoji": "📝",
         "events": ["command"],
-        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with OpenClaw" }],
+        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with Reecenbot" }],
       },
   }
 ---
@@ -62,7 +62,7 @@ No configuration needed. The hook automatically:
 To disable this hook:
 
 ```bash
-openclaw hooks disable command-logger
+reecenbot hooks disable command-logger
 ```
 
 Or via config:
@@ -90,7 +90,7 @@ The hook does not automatically rotate logs. To manage log size, you can:
    ```
 
 2. **Use logrotate** (Linux):
-   Create `/etc/logrotate.d/openclaw`:
+   Create `/etc/logrotate.d/reecenbot`:
    ```
    /home/username/.openclaw/logs/commands.log {
        weekly

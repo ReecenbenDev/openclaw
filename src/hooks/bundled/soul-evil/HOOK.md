@@ -4,12 +4,12 @@ description: "Swap SOUL.md with SOUL_EVIL.md during a purge window or by random 
 homepage: https://docs.openclaw.ai/hooks/soul-evil
 metadata:
   {
-    "openclaw":
+    "reecenbot":
       {
         "emoji": "😈",
         "events": ["agent:bootstrap"],
         "requires": { "config": ["hooks.internal.entries.soul-evil.enabled"] },
-        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with OpenClaw" }],
+        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with Reecenbot" }],
       },
   }
 ---
@@ -67,5 +67,5 @@ Add this to your config (`~/.openclaw/openclaw.json`):
 ## Enable
 
 ```bash
-openclaw hooks enable soul-evil
+reecenbot hooks enable soul-evil
 ```

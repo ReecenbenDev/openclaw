@@ -4,7 +4,7 @@ import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
 import type { OpenClawConfig } from "../config/config.js";
 import type { ExecApprovalsResolved } from "../infra/exec-approvals.js";
-import { createOpenClawCodingTools } from "./pi-tools.js";
+import { createReecenbotCodingTools } from "./pi-tools.js";
 
 vi.mock("../infra/exec-approvals.js", async (importOriginal) => {
   const mod = await importOriginal<typeof import("../infra/exec-approvals.js")>();
@@ -40,13 +40,13 @@ vi.mock("../infra/exec-approvals.js", async (importOriginal) => {
   return { ...mod, resolveExecApprovals: () => approvals };
 });
 
-describe("createOpenClawCodingTools safeBins", () => {
+describe("createReecenbotCodingTools safeBins", () => {
   it("threads tools.exec.safeBins into exec allowlist checks", async () => {
     if (process.platform === "win32") {
       return;
     }
 
-    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-safe-bins-"));
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "reecenbot-safe-bins-"));
     const cfg: OpenClawConfig = {
       tools: {
         exec: {
@@ -58,7 +58,7 @@ describe("createOpenClawCodingTools safeBins", () => {
       },
     };
 
-    const tools = createOpenClawCodingTools({
+    const tools = createReecenbotCodingTools({
       config: cfg,
       sessionKey: "agent:main:main",
       workspaceDir: tmpDir,

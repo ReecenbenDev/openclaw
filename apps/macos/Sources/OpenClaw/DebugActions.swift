@@ -38,7 +38,7 @@ enum DebugActions {
 
     @MainActor
     static func openConfigFolder() {
-        let url = OpenClawPaths.stateDirURL
+        let url = ReecenbotPaths.stateDirURL
         NSWorkspace.shared.activateFileViewerSelecting([url])
     }
 
@@ -61,7 +61,7 @@ enum DebugActions {
     }
 
     static func sendTestNotification() async {
-        _ = await NotificationManager().send(title: "OpenClaw", body: "Test notification", sound: nil)
+        _ = await NotificationManager().send(title: "Reecenbot", body: "Test notification", sound: nil)
     }
 
     static func sendDebugVoice() async -> Result<String, DebugActionError> {
@@ -193,7 +193,7 @@ enum DebugActions {
     @MainActor
     private static func resolveSessionStorePath() -> String {
         let defaultPath = SessionLoader.defaultStorePath
-        let configURL = OpenClawPaths.configURL
+        let configURL = ReecenbotPaths.configURL
         guard
             let data = try? Data(contentsOf: configURL),
             let parsed = try? JSONSerialization.jsonObject(with: data) as? [String: Any],

@@ -145,7 +145,7 @@ describe("gateway-cli coverage", () => {
     discoverGatewayBeacons.mockReset();
     discoverGatewayBeacons.mockResolvedValueOnce([
       {
-        instanceName: "Studio (OpenClaw)",
+        instanceName: "Studio (Reecenbot)",
         displayName: "Studio",
         domain: "local.",
         host: "studio.local",
@@ -177,9 +177,9 @@ describe("gateway-cli coverage", () => {
     discoverGatewayBeacons.mockReset();
     discoverGatewayBeacons.mockResolvedValueOnce([
       {
-        instanceName: "Studio (OpenClaw)",
+        instanceName: "Studio (Reecenbot)",
         displayName: "Studio",
-        domain: "openclaw.internal.",
+        domain: "reecenbot.internal.",
         host: "studio.openclaw.internal",
         lanHost: "studio.local",
         tailnetDns: "studio.tailnet.ts.net",
@@ -200,7 +200,7 @@ describe("gateway-cli coverage", () => {
     const out = runtimeLogs.join("\n");
     expect(out).toContain("Gateway Discovery");
     expect(out).toContain("Found 1 gateway(s)");
-    expect(out).toContain("- Studio openclaw.internal.");
+    expect(out).toContain("- Studio reecenbot.internal.");
     expect(out).toContain("  tailnet: studio.tailnet.ts.net");
     expect(out).toContain("  host: studio.openclaw.internal");
     expect(out).toContain("  ws: ws://studio.tailnet.ts.net:18789");

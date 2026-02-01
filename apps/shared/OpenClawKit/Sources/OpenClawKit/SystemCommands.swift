@@ -1,6 +1,6 @@
 import Foundation
 
-public enum OpenClawSystemCommand: String, Codable, Sendable {
+public enum ReecenbotSystemCommand: String, Codable, Sendable {
     case run = "system.run"
     case which = "system.which"
     case notify = "system.notify"
@@ -8,19 +8,19 @@ public enum OpenClawSystemCommand: String, Codable, Sendable {
     case execApprovalsSet = "system.execApprovals.set"
 }
 
-public enum OpenClawNotificationPriority: String, Codable, Sendable {
+public enum ReecenbotNotificationPriority: String, Codable, Sendable {
     case passive
     case active
     case timeSensitive
 }
 
-public enum OpenClawNotificationDelivery: String, Codable, Sendable {
+public enum ReecenbotNotificationDelivery: String, Codable, Sendable {
     case system
     case overlay
     case auto
 }
 
-public struct OpenClawSystemRunParams: Codable, Sendable, Equatable {
+public struct ReecenbotSystemRunParams: Codable, Sendable, Equatable {
     public var command: [String]
     public var rawCommand: String?
     public var cwd: String?
@@ -57,7 +57,7 @@ public struct OpenClawSystemRunParams: Codable, Sendable, Equatable {
     }
 }
 
-public struct OpenClawSystemWhichParams: Codable, Sendable, Equatable {
+public struct ReecenbotSystemWhichParams: Codable, Sendable, Equatable {
     public var bins: [String]
 
     public init(bins: [String]) {
@@ -65,19 +65,19 @@ public struct OpenClawSystemWhichParams: Codable, Sendable, Equatable {
     }
 }
 
-public struct OpenClawSystemNotifyParams: Codable, Sendable, Equatable {
+public struct ReecenbotSystemNotifyParams: Codable, Sendable, Equatable {
     public var title: String
     public var body: String
     public var sound: String?
-    public var priority: OpenClawNotificationPriority?
-    public var delivery: OpenClawNotificationDelivery?
+    public var priority: ReecenbotNotificationPriority?
+    public var delivery: ReecenbotNotificationDelivery?
 
     public init(
         title: String,
         body: String,
         sound: String? = nil,
-        priority: OpenClawNotificationPriority? = nil,
-        delivery: OpenClawNotificationDelivery? = nil)
+        priority: ReecenbotNotificationPriority? = nil,
+        delivery: ReecenbotNotificationDelivery? = nil)
     {
         self.title = title
         self.body = body

@@ -1,13 +1,13 @@
 import AppKit
-import OpenClawChatUI
-import OpenClawDiscovery
-import OpenClawIPC
+import ReecenbotChatUI
+import ReecenbotDiscovery
+import ReecenbotIPC
 import Combine
 import Observation
 import SwiftUI
 
 enum UIStrings {
-    static let welcomeTitle = "Welcome to OpenClaw"
+    static let welcomeTitle = "Welcome to Reecenbot"
 }
 
 @MainActor
@@ -79,7 +79,7 @@ struct OnboardingView: View {
     @State var anthropicAuthVerificationAttempted = false
     @State var anthropicAuthVerificationFailed = false
     @State var anthropicAuthVerifiedAt: Date?
-    @State var anthropicAuthDetectedStatus: OpenClawOAuthStore.AnthropicOAuthStatus = .missingFile
+    @State var anthropicAuthDetectedStatus: ReecenbotOAuthStore.AnthropicOAuthStatus = .missingFile
     @State var anthropicAuthAutoDetectClipboard = true
     @State var anthropicAuthAutoConnectClipboard = true
     @State var anthropicAuthLastPasteboardChangeCount = NSPasteboard.general.changeCount
@@ -90,7 +90,7 @@ struct OnboardingView: View {
     @State var showAdvancedConnection = false
     @State var preferredGatewayID: String?
     @State var gatewayDiscovery: GatewayDiscoveryModel
-    @State var onboardingChatModel: OpenClawChatViewModel
+    @State var onboardingChatModel: ReecenbotChatViewModel
     @State var onboardingSkillsModel = SkillsSettingsModel()
     @State var onboardingWizard = OnboardingWizardModel()
     @State var didLoadOnboardingSkills = false
@@ -177,7 +177,7 @@ struct OnboardingView: View {
         self.permissionMonitor = permissionMonitor
         self._gatewayDiscovery = State(initialValue: discoveryModel)
         self._onboardingChatModel = State(
-            initialValue: OpenClawChatViewModel(
+            initialValue: ReecenbotChatViewModel(
                 sessionKey: "onboarding",
                 transport: MacGatewayChatTransport()))
     }

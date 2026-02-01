@@ -12,13 +12,15 @@ export function getA2uiPaths(env = process.env) {
 
 export async function copyA2uiAssets({ srcDir, outDir }: { srcDir: string; outDir: string }) {
   const skipMissing = process.env.OPENCLAW_A2UI_SKIP_MISSING === "1";
+  const requireBundle = process.env.OPENCLAW_A2UI_REQUIRE_BUNDLE === "1";
   try {
     await fs.stat(path.join(srcDir, "index.html"));
     await fs.stat(path.join(srcDir, "a2ui.bundle.js"));
   } catch (err) {
-    const message = 'Missing A2UI bundle assets. Run "pnpm canvas:a2ui:bundle" and retry.';
-    if (skipMissing) {
-      console.warn(`${message} Skipping copy (OPENCLAW_A2UI_SKIP_MISSING=1).`);
+    const message =
+      'Missing A2UI bundle assets (a2ui.bundle.js). Run "pnpm canvas:a2ui:bundle" when A2UI sources are available, or build will skip copying A2UI.';
+    if (skipMissing || !requireBundle) {
+      console.warn(`A2UI: ${message}`);
       return;
     }
     throw new Error(message, { cause: err });

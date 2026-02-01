@@ -1,6 +1,6 @@
 import Foundation
 
-public enum OpenClawBonjour {
+public enum ReecenbotBonjour {
     // v0: internal-only, subject to rename.
     public static let gatewayServiceType = "_openclaw-gw._tcp"
     public static let gatewayServiceDomain = "local."

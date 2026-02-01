@@ -1,4 +1,4 @@
-package ai.openclaw.android.node
+package ai.reecenbot.android.node
 
 import android.content.Context
 import android.hardware.display.DisplayManager
@@ -6,7 +6,7 @@ import android.media.MediaRecorder
 import android.media.projection.MediaProjectionManager
 import android.os.Build
 import android.util.Base64
-import ai.openclaw.android.ScreenCaptureRequester
+import ai.reecenbot.android.ScreenCaptureRequester
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -17,13 +17,13 @@ class ScreenRecordManager(private val context: Context) {
   data class Payload(val payloadJson: String)
 
   @Volatile private var screenCaptureRequester: ScreenCaptureRequester? = null
-  @Volatile private var permissionRequester: ai.openclaw.android.PermissionRequester? = null
+  @Volatile private var permissionRequester: ai.reecenbot.android.PermissionRequester? = null
 
   fun attachScreenCaptureRequester(requester: ScreenCaptureRequester) {
     screenCaptureRequester = requester
   }
 
-  fun attachPermissionRequester(requester: ai.openclaw.android.PermissionRequester) {
+  fun attachPermissionRequester(requester: ai.reecenbot.android.PermissionRequester) {
     permissionRequester = requester
   }
 

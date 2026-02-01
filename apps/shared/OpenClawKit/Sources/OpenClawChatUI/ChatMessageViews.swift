@@ -1,4 +1,4 @@
-import OpenClawKit
+import ReecenbotKit
 import Foundation
 import SwiftUI
 
@@ -135,8 +135,8 @@ private struct ChatBubbleShape: InsettableShape {
 
 @MainActor
 struct ChatMessageBubble: View {
-    let message: OpenClawChatMessage
-    let style: OpenClawChatView.Style
+    let message: ReecenbotChatMessage
+    let style: ReecenbotChatView.Style
     let markdownVariant: ChatMarkdownVariant
     let userAccent: Color?
 
@@ -157,15 +157,15 @@ struct ChatMessageBubble: View {
 
 @MainActor
 private struct ChatMessageBody: View {
-    let message: OpenClawChatMessage
+    let message: ReecenbotChatMessage
     let isUser: Bool
-    let style: OpenClawChatView.Style
+    let style: ReecenbotChatView.Style
     let markdownVariant: ChatMarkdownVariant
     let userAccent: Color?
 
     var body: some View {
         let text = self.primaryText
-        let textColor = self.isUser ? OpenClawChatTheme.userText : OpenClawChatTheme.assistantText
+        let textColor = self.isUser ? ReecenbotChatTheme.userText : ReecenbotChatTheme.assistantText
 
         VStack(alignment: .leading, spacing: 10) {
             if self.isToolResultMessage {
@@ -232,7 +232,7 @@ private struct ChatMessageBody: View {
         return parts.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private var inlineAttachments: [OpenClawChatMessageContent] {
+    private var inlineAttachments: [ReecenbotChatMessageContent] {
         self.message.content.filter { content in
             switch content.type ?? "text" {
             case "file", "attachment":
@@ -243,7 +243,7 @@ private struct ChatMessageBody: View {
         }
     }
 
-    private var toolCalls: [OpenClawChatMessageContent] {
+    private var toolCalls: [ReecenbotChatMessageContent] {
         self.message.content.filter { content in
             let kind = (content.type ?? "").lowercased()
             if ["toolcall", "tool_call", "tooluse", "tool_use"].contains(kind) {
@@ -253,7 +253,7 @@ private struct ChatMessageBody: View {
         }
     }
 
-    private var inlineToolResults: [OpenClawChatMessageContent] {
+    private var inlineToolResults: [ReecenbotChatMessageContent] {
         self.message.content.filter { content in
             let kind = (content.type ?? "").lowercased()
             return kind == "toolresult" || kind == "tool_result"
@@ -276,12 +276,12 @@ private struct ChatMessageBody: View {
 
     private var bubbleFillColor: Color {
         if self.isUser {
-            return self.userAccent ?? OpenClawChatTheme.userBubble
+            return self.userAccent ?? ReecenbotChatTheme.userBubble
         }
         if self.style == .onboarding {
-            return OpenClawChatTheme.onboardingAssistantBubble
+            return ReecenbotChatTheme.onboardingAssistantBubble
         }
-        return OpenClawChatTheme.assistantBubble
+        return ReecenbotChatTheme.assistantBubble
     }
 
     private var bubbleBackground: AnyShapeStyle {
@@ -293,7 +293,7 @@ private struct ChatMessageBody: View {
             return Color.white.opacity(0.12)
         }
         if self.style == .onboarding {
-            return OpenClawChatTheme.onboardingAssistantBorder
+            return ReecenbotChatTheme.onboardingAssistantBorder
         }
         return Color.white.opacity(0.08)
     }
@@ -339,7 +339,7 @@ private struct ChatMessageBody: View {
 }
 
 private struct AttachmentRow: View {
-    let att: OpenClawChatMessageContent
+    let att: ReecenbotChatMessageContent
     let isUser: Bool
 
     var body: some View {
@@ -348,7 +348,7 @@ private struct AttachmentRow: View {
             Text(self.att.fileName ?? "Attachment")
                 .font(.footnote)
                 .lineLimit(1)
-                .foregroundStyle(self.isUser ? OpenClawChatTheme.userText : OpenClawChatTheme.assistantText)
+                .foregroundStyle(self.isUser ? ReecenbotChatTheme.userText : ReecenbotChatTheme.assistantText)
             Spacer()
         }
         .padding(10)
@@ -358,7 +358,7 @@ private struct AttachmentRow: View {
 }
 
 private struct ToolCallCard: View {
-    let content: OpenClawChatMessageContent
+    let content: ReecenbotChatMessageContent
     let isUser: Bool
 
     var body: some View {
@@ -379,7 +379,7 @@ private struct ToolCallCard: View {
         .padding(10)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(OpenClawChatTheme.subtleCard)
+                .fill(ReecenbotChatTheme.subtleCard)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .strokeBorder(Color.white.opacity(0.08), lineWidth: 1)))
@@ -414,7 +414,7 @@ private struct ToolResultCard: View {
 
             Text(self.displayText)
                 .font(.footnote.monospaced())
-                .foregroundStyle(self.isUser ? OpenClawChatTheme.userText : OpenClawChatTheme.assistantText)
+                .foregroundStyle(self.isUser ? ReecenbotChatTheme.userText : ReecenbotChatTheme.assistantText)
                 .lineLimit(self.expanded ? nil : Self.previewLineLimit)
 
             if self.shouldShowToggle {
@@ -429,7 +429,7 @@ private struct ToolResultCard: View {
         .padding(10)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(OpenClawChatTheme.subtleCard)
+                .fill(ReecenbotChatTheme.subtleCard)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .strokeBorder(Color.white.opacity(0.08), lineWidth: 1)))
@@ -453,13 +453,13 @@ private struct ToolResultCard: View {
 
 @MainActor
 struct ChatTypingIndicatorBubble: View {
-    let style: OpenClawChatView.Style
+    let style: ReecenbotChatView.Style
 
     var body: some View {
         HStack(spacing: 10) {
             TypingDots()
             if self.style == .standard {
-                Text("OpenClaw is thinking…")
+                Text("Reecenbot is thinking…")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 Spacer()
@@ -469,7 +469,7 @@ struct ChatTypingIndicatorBubble: View {
         .padding(.horizontal, self.style == .standard ? 12 : 14)
         .background(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(OpenClawChatTheme.assistantBubble))
+                .fill(ReecenbotChatTheme.assistantBubble))
         .overlay(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .strokeBorder(Color.white.opacity(0.08), lineWidth: 1))
@@ -496,7 +496,7 @@ struct ChatStreamingAssistantBubble: View {
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(OpenClawChatTheme.assistantBubble))
+                .fill(ReecenbotChatTheme.assistantBubble))
         .overlay(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .strokeBorder(Color.white.opacity(0.08), lineWidth: 1))
@@ -507,7 +507,7 @@ struct ChatStreamingAssistantBubble: View {
 
 @MainActor
 struct ChatPendingToolsBubble: View {
-    let toolCalls: [OpenClawChatPendingToolCall]
+    let toolCalls: [ReecenbotChatPendingToolCall]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -540,7 +540,7 @@ struct ChatPendingToolsBubble: View {
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(OpenClawChatTheme.assistantBubble))
+                .fill(ReecenbotChatTheme.assistantBubble))
         .overlay(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .strokeBorder(Color.white.opacity(0.08), lineWidth: 1))
@@ -609,7 +609,7 @@ private struct ChatAssistantTextBody: View {
                     context: .assistant,
                     variant: self.markdownVariant,
                     font: font,
-                    textColor: OpenClawChatTheme.assistantText)
+                    textColor: ReecenbotChatTheme.assistantText)
             }
         }
     }

@@ -1,4 +1,4 @@
-import OpenClawDiscovery
+import ReecenbotDiscovery
 import SwiftUI
 
 #if DEBUG

@@ -54,7 +54,7 @@ describe("Nix integration (U3, U5, U9)", () => {
         { OPENCLAW_CONFIG_PATH: undefined, OPENCLAW_STATE_DIR: undefined },
         async () => {
           const { CONFIG_PATH } = await import("./config.js");
-          expect(CONFIG_PATH).toMatch(/\.openclaw[\\/]openclaw\.json$/);
+          expect(CONFIG_PATH).toMatch(/\.openclaw[\\/]reecenbot\.json$/);
         },
       );
     });
@@ -102,7 +102,7 @@ describe("Nix integration (U3, U5, U9)", () => {
           "utf-8",
         );
         await fs.writeFile(
-          path.join(pluginDir, "openclaw.plugin.json"),
+          path.join(pluginDir, "reecenbot.plugin.json"),
           JSON.stringify(
             {
               id: "demo-plugin",

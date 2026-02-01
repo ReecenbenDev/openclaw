@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite(.serialized) struct UtilitiesTests {
     @Test func ageStringsCoverCommonWindows() {

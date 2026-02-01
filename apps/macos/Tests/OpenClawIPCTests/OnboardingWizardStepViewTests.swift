@@ -1,9 +1,9 @@
-import OpenClawProtocol
+import ReecenbotProtocol
 import SwiftUI
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
-private typealias ProtoAnyCodable = OpenClawProtocol.AnyCodable
+private typealias ProtoAnyCodable = ReecenbotProtocol.AnyCodable
 
 @Suite(.serialized)
 @MainActor

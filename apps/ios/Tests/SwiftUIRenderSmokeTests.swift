@@ -1,8 +1,8 @@
-import OpenClawKit
+import ReecenbotKit
 import SwiftUI
 import Testing
 import UIKit
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite struct SwiftUIRenderSmokeTests {
     @MainActor private static func host(_ view: some View) -> UIWindow {

@@ -123,7 +123,7 @@ function createMinimalRun(params?: {
 describe("runReplyAgent typing (heartbeat)", () => {
   it("resets corrupted Gemini sessions and deletes transcripts", async () => {
     const prevStateDir = process.env.OPENCLAW_STATE_DIR;
-    const stateDir = await fs.mkdtemp(path.join(tmpdir(), "openclaw-session-reset-"));
+    const stateDir = await fs.mkdtemp(path.join(tmpdir(), "reecenbot-session-reset-"));
     process.env.OPENCLAW_STATE_DIR = stateDir;
     try {
       const sessionId = "session-corrupt";
@@ -170,7 +170,7 @@ describe("runReplyAgent typing (heartbeat)", () => {
   });
   it("keeps sessions intact on other errors", async () => {
     const prevStateDir = process.env.OPENCLAW_STATE_DIR;
-    const stateDir = await fs.mkdtemp(path.join(tmpdir(), "openclaw-session-noreset-"));
+    const stateDir = await fs.mkdtemp(path.join(tmpdir(), "reecenbot-session-noreset-"));
     process.env.OPENCLAW_STATE_DIR = stateDir;
     try {
       const sessionId = "session-ok";

@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 import type { OpenClawConfig } from "../config/config.js";
 import "./test-helpers/fast-coding-tools.js";
-import { createOpenClawCodingTools } from "./pi-tools.js";
+import { createReecenbotCodingTools } from "./pi-tools.js";
 
-const defaultTools = createOpenClawCodingTools();
+const defaultTools = createReecenbotCodingTools();
 
-describe("createOpenClawCodingTools", () => {
+describe("createReecenbotCodingTools", () => {
   it("preserves action enums in normalized schemas", () => {
     const toolNames = ["browser", "canvas", "nodes", "cron", "gateway", "message"];
 
@@ -64,14 +64,14 @@ describe("createOpenClawCodingTools", () => {
         },
       },
     };
-    const openAiTools = createOpenClawCodingTools({
+    const openAiTools = createReecenbotCodingTools({
       config,
       modelProvider: "openai",
       modelId: "gpt-5.2",
     });
     expect(openAiTools.some((tool) => tool.name === "apply_patch")).toBe(true);
 
-    const anthropicTools = createOpenClawCodingTools({
+    const anthropicTools = createReecenbotCodingTools({
       config,
       modelProvider: "anthropic",
       modelId: "claude-opus-4-5",
@@ -86,14 +86,14 @@ describe("createOpenClawCodingTools", () => {
         },
       },
     };
-    const allowed = createOpenClawCodingTools({
+    const allowed = createReecenbotCodingTools({
       config,
       modelProvider: "openai",
       modelId: "gpt-5.2",
     });
     expect(allowed.some((tool) => tool.name === "apply_patch")).toBe(true);
 
-    const denied = createOpenClawCodingTools({
+    const denied = createReecenbotCodingTools({
       config,
       modelProvider: "openai",
       modelId: "gpt-5-mini",
@@ -101,7 +101,7 @@ describe("createOpenClawCodingTools", () => {
     expect(denied.some((tool) => tool.name === "apply_patch")).toBe(false);
   });
   it("keeps canonical tool names for Anthropic OAuth (pi-ai remaps on the wire)", () => {
-    const tools = createOpenClawCodingTools({
+    const tools = createReecenbotCodingTools({
       modelProvider: "anthropic",
       modelAuthMode: "oauth",
     });
@@ -113,7 +113,7 @@ describe("createOpenClawCodingTools", () => {
     expect(names.has("apply_patch")).toBe(false);
   });
   it("provides top-level object schemas for all tools", () => {
-    const tools = createOpenClawCodingTools();
+    const tools = createReecenbotCodingTools();
     const offenders = tools
       .map((tool) => {
         const schema =

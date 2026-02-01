@@ -1,8 +1,8 @@
 import AppKit
-import OpenClawIPC
+import ReecenbotIPC
 import Foundation
 import Testing
-@testable import OpenClaw
+@testable import Reecenbot
 
 @Suite(.serialized)
 @MainActor

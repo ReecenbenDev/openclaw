@@ -1,7 +1,7 @@
 {
   "name": "@openclaw/tlon",
   "version": "2026.1.30",
-  "description": "OpenClaw Tlon/Urbit channel plugin",
+  "description": "Reecenbot Tlon/Urbit channel plugin",
   "type": "module",
   "dependencies": {
     "@urbit/aura": "^3.0.0",

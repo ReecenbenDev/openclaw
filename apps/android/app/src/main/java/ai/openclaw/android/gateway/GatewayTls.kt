@@ -1,4 +1,4 @@
-package ai.openclaw.android.gateway
+package ai.reecenbot.android.gateway
 
 import android.annotation.SuppressLint
 import java.security.MessageDigest

@@ -1,7 +1,7 @@
 {
   "name": "@openclaw/bluebubbles",
   "version": "2026.1.30",
-  "description": "OpenClaw BlueBubbles channel plugin",
+  "description": "Reecenbot BlueBubbles channel plugin",
   "type": "module",
   "devDependencies": {
     "openclaw": "workspace:*"

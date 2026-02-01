@@ -89,7 +89,7 @@ enum CommandResolver {
         // Dev-only convenience. Avoid project-local PATH hijacking in release builds.
         extras.insert(projectRoot.appendingPathComponent("node_modules/.bin").path, at: 0)
         #endif
-        let openclawPaths = self.openclawManagedPaths(home: home)
+        let openclawPaths = self.reecenbotManagedPaths(home: home)
         if !openclawPaths.isEmpty {
             extras.insert(contentsOf: openclawPaths, at: 1)
         }
@@ -101,7 +101,7 @@ enum CommandResolver {
 
     private static func openclawManagedPaths(home: URL) -> [String] {
         let bases = [
-            home.appendingPathComponent(".openclaw"),
+            home.appendingPathComponent(".reecenbot"),
         ]
         var paths: [String] = []
         for base in bases {
@@ -197,7 +197,7 @@ enum CommandResolver {
         self.findExecutable(named: self.helperName, searchPaths: searchPaths)
     }
 
-    static func projectOpenClawExecutable(projectRoot: URL? = nil) -> String? {
+    static func projectReecenbotExecutable(projectRoot: URL? = nil) -> String? {
         #if DEBUG
         let root = projectRoot ?? self.projectRoot()
         let candidate = root.appendingPathComponent("node_modules/.bin").appendingPathComponent(self.helperName).path
@@ -219,8 +219,8 @@ enum CommandResolver {
         return nil
     }
 
-    static func hasAnyOpenClawInvoker(searchPaths: [String]? = nil) -> Bool {
-        if self.openclawExecutable(searchPaths: searchPaths) != nil { return true }
+    static func hasAnyReecenbotInvoker(searchPaths: [String]? = nil) -> Bool {
+        if self.reecenbotExecutable(searchPaths: searchPaths) != nil { return true }
         if self.findExecutable(named: "pnpm", searchPaths: searchPaths) != nil { return true }
         if self.findExecutable(named: "node", searchPaths: searchPaths) != nil,
            self.nodeCliPath() != nil
@@ -251,7 +251,7 @@ enum CommandResolver {
         switch runtimeResult {
         case let .success(runtime):
             let root = self.projectRoot()
-            if let openclawPath = self.projectOpenClawExecutable(projectRoot: root) {
+            if let openclawPath = self.projectReecenbotExecutable(projectRoot: root) {
                 return [openclawPath, subcommand] + extraArgs
             }
 
@@ -266,7 +266,7 @@ enum CommandResolver {
                 // Use --silent to avoid pnpm lifecycle banners that would corrupt JSON outputs.
                 return [pnpm, "--silent", "openclaw", subcommand] + extraArgs
             }
-            if let openclawPath = self.openclawExecutable(searchPaths: searchPaths) {
+            if let openclawPath = self.reecenbotExecutable(searchPaths: searchPaths) {
                 return [openclawPath, subcommand] + extraArgs
             }
 
@@ -287,7 +287,7 @@ enum CommandResolver {
         configRoot: [String: Any]? = nil,
         searchPaths: [String]? = nil) -> [String]
     {
-        self.openclawNodeCommand(
+        self.reecenbotNodeCommand(
             subcommand: subcommand,
             extraArgs: extraArgs,
             defaults: defaults,
@@ -413,7 +413,7 @@ enum CommandResolver {
         defaults: UserDefaults = .standard,
         configRoot: [String: Any]? = nil) -> RemoteSettings
     {
-        let root = configRoot ?? OpenClawConfigFile.loadDict()
+        let root = configRoot ?? ReecenbotConfigFile.loadDict()
         let mode = ConnectionModeResolver.resolve(root: root, defaults: defaults).mode
         let target = defaults.string(forKey: remoteTargetKey) ?? ""
         let identity = defaults.string(forKey: remoteIdentityKey) ?? ""

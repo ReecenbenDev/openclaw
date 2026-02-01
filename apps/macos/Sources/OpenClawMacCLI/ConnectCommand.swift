@@ -1,5 +1,5 @@
-import OpenClawKit
-import OpenClawProtocol
+import ReecenbotKit
+import ReecenbotProtocol
 import Foundation
 #if canImport(Darwin)
 import Darwin
@@ -130,7 +130,7 @@ func runConnect(_ args: [String]) async {
     let config = loadGatewayConfig()
     do {
         let endpoint = try resolveGatewayEndpoint(opts: opts, config: config)
-        let displayName = opts.displayName ?? Host.current().localizedName ?? "OpenClaw macOS Debug CLI"
+        let displayName = opts.displayName ?? Host.current().localizedName ?? "Reecenbot macOS Debug CLI"
         let connectOptions = GatewayConnectOptions(
             role: opts.role,
             scopes: opts.scopes,
@@ -207,7 +207,7 @@ private func printConnectOutput(_ output: ConnectOutput, json: Bool) {
         return
     }
 
-    print("OpenClaw macOS Gateway Connect")
+    print("Reecenbot macOS Gateway Connect")
     print("Status: \(output.status)")
     print("URL: \(output.url)")
     print("Mode: \(output.mode)")

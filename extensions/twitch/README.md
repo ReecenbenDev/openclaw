@@ -1,6 +1,6 @@
 # @openclaw/twitch
 
-Twitch channel plugin for OpenClaw.
+Twitch channel plugin for Reecenbot.
 
 ## Install (local checkout)
 
@@ -80,7 +80,7 @@ Multi-account config (advanced):
 
 ## Full documentation
 
-See https://docs.openclaw.ai/channels/twitch for:
+See https://docs.reecenbot.ai/channels/twitch for:
 
 - Token refresh setup
 - Access control patterns

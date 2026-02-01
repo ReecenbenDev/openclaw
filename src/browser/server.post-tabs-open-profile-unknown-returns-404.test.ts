@@ -93,9 +93,9 @@ vi.mock("../config/config.js", async (importOriginal) => {
         color: "#FF4500",
         attachOnly: cfgAttachOnly,
         headless: true,
-        defaultProfile: "openclaw",
+        defaultProfile: "reecenbot",
         profiles: {
-          openclaw: { cdpPort: testPort + 1, color: "#FF4500" },
+          reecenbot: { cdpPort: testPort + 1, color: "#FF4500" },
         },
       },
     }),
@@ -107,20 +107,20 @@ const launchCalls = vi.hoisted(() => [] as Array<{ port: number }>);
 vi.mock("./chrome.js", () => ({
   isChromeCdpReady: vi.fn(async () => reachable),
   isChromeReachable: vi.fn(async () => reachable),
-  launchOpenClawChrome: vi.fn(async (_resolved: unknown, profile: { cdpPort: number }) => {
+  launchReecenbotChrome: vi.fn(async (_resolved: unknown, profile: { cdpPort: number }) => {
     launchCalls.push({ port: profile.cdpPort });
     reachable = true;
     return {
       pid: 123,
       exe: { kind: "chrome", path: "/fake/chrome" },
-      userDataDir: "/tmp/openclaw",
+      userDataDir: "/tmp/reecenbot",
       cdpPort: profile.cdpPort,
       startedAt: Date.now(),
       proc,
     };
   }),
-  resolveOpenClawUserDataDir: vi.fn(() => "/tmp/openclaw"),
-  stopOpenClawChrome: vi.fn(async () => {
+  resolveReecenbotUserDataDir: vi.fn(() => "/tmp/reecenbot"),
+  stopReecenbotChrome: vi.fn(async () => {
     reachable = false;
   }),
 }));
@@ -369,11 +369,11 @@ describe("profile CRUD endpoints", () => {
     await startBrowserControlServerFromConfig();
     const base = `http://127.0.0.1:${testPort}`;
 
-    // "openclaw" already exists as the default profile
+    // "reecenbot" already exists as the default profile
     const result = await realFetch(`${base}/profiles/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: "openclaw" }),
+      body: JSON.stringify({ name: "reecenbot" }),
     });
     expect(result.status).toBe(409);
     const body = (await result.json()) as { error: string };
@@ -434,8 +434,8 @@ describe("profile CRUD endpoints", () => {
     await startBrowserControlServerFromConfig();
     const base = `http://127.0.0.1:${testPort}`;
 
-    // openclaw is the default profile
-    const result = await realFetch(`${base}/profiles/openclaw`, {
+    // reecenbot is the default profile
+    const result = await realFetch(`${base}/profiles/reecenbot`, {
       method: "DELETE",
     });
     expect(result.status).toBe(400);

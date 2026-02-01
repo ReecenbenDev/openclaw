@@ -14,7 +14,7 @@ const runtimeStub = {
         return override;
       }
       const resolvedHome = homedir ? homedir() : os.homedir();
-      return path.join(resolvedHome, ".openclaw");
+      return path.join(resolvedHome, ".reecenbot");
     },
   },
 } as unknown as PluginRuntime;

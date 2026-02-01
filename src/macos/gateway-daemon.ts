@@ -28,7 +28,7 @@ type GatewayWsLogStyle = "auto" | "full" | "compact";
 
 async function main() {
   if (hasFlag(args, "--version") || hasFlag(args, "-v")) {
-    // Match `openclaw --version` behavior for Swift env/version checks.
+    // Match `reecenbot --version` behavior for Swift env/version checks.
     // Keep output a single line.
     console.log(BUNDLED_VERSION);
     process.exit(0);
@@ -76,7 +76,7 @@ async function main() {
   const portRaw =
     argValue(args, "--port") ??
     process.env.OPENCLAW_GATEWAY_PORT ??
-    process.env.CLAWDBOT_GATEWAY_PORT ??
+    process.env.OPENCLAW_GATEWAY_PORT ??
     (typeof cfg.gateway?.port === "number" ? String(cfg.gateway.port) : "") ??
     "18789";
   const port = Number.parseInt(portRaw, 10);
@@ -88,7 +88,7 @@ async function main() {
   const bindRaw =
     argValue(args, "--bind") ??
     process.env.OPENCLAW_GATEWAY_BIND ??
-    process.env.CLAWDBOT_GATEWAY_BIND ??
+    process.env.OPENCLAW_GATEWAY_BIND ??
     cfg.gateway?.bind ??
     "loopback";
   const bind =
@@ -217,7 +217,7 @@ async function main() {
 
 void main().catch((err) => {
   console.error(
-    "[openclaw] Gateway daemon failed:",
+    "[reecenbot] Gateway daemon failed:",
     err instanceof Error ? (err.stack ?? err.message) : err,
   );
   process.exit(1);

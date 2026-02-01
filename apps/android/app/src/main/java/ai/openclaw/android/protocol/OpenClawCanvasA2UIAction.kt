@@ -1,9 +1,9 @@
-package ai.openclaw.android.protocol
+package ai.reecenbot.android.protocol
 
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 
-object OpenClawCanvasA2UIAction {
+object ReecenbotCanvasA2UIAction {
   fun extractActionName(userAction: JsonObject): String? {
     val name =
       (userAction["name"] as? JsonPrimitive)

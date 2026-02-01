@@ -3,7 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { loadOpenClawPlugins } from "./loader.js";
+import { loadReecenbotPlugins } from "./loader.js";
 
 type TempPlugin = { dir: string; file: string; id: string };
 
@@ -12,7 +12,7 @@ const prevBundledDir = process.env.OPENCLAW_BUNDLED_PLUGINS_DIR;
 const EMPTY_PLUGIN_SCHEMA = { type: "object", additionalProperties: false, properties: {} };
 
 function makeTempDir() {
-  const dir = path.join(os.tmpdir(), `openclaw-plugin-${randomUUID()}`);
+  const dir = path.join(os.tmpdir(), `reecenbot-plugin-${randomUUID()}`);
   fs.mkdirSync(dir, { recursive: true });
   tempDirs.push(dir);
   return dir;
@@ -58,7 +58,7 @@ afterEach(() => {
   }
 });
 
-describe("loadOpenClawPlugins", () => {
+describe("loadReecenbotPlugins", () => {
   it("disables bundled plugins by default", () => {
     const bundledDir = makeTempDir();
     writePlugin({
@@ -69,7 +69,7 @@ describe("loadOpenClawPlugins", () => {
     });
     process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = bundledDir;
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       config: {
         plugins: {
@@ -81,7 +81,7 @@ describe("loadOpenClawPlugins", () => {
     const bundled = registry.plugins.find((entry) => entry.id === "bundled");
     expect(bundled?.status).toBe("disabled");
 
-    const enabledRegistry = loadOpenClawPlugins({
+    const enabledRegistry = loadReecenbotPlugins({
       cache: false,
       config: {
         plugins: {
@@ -126,7 +126,7 @@ describe("loadOpenClawPlugins", () => {
     });
     process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = bundledDir;
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       config: {
         plugins: {
@@ -153,7 +153,7 @@ describe("loadOpenClawPlugins", () => {
     });
     process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = bundledDir;
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       config: {
         plugins: {
@@ -176,10 +176,10 @@ describe("loadOpenClawPlugins", () => {
     fs.writeFileSync(
       path.join(pluginDir, "package.json"),
       JSON.stringify({
-        name: "@openclaw/memory-core",
+        name: "@reecenbot/memory-core",
         version: "1.2.3",
         description: "Memory plugin package",
-        openclaw: { extensions: ["./index.ts"] },
+        reecenbot: { extensions: ["./index.ts"] },
       }),
       "utf-8",
     );
@@ -192,7 +192,7 @@ describe("loadOpenClawPlugins", () => {
 
     process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = bundledDir;
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       config: {
         plugins: {
@@ -216,7 +216,7 @@ describe("loadOpenClawPlugins", () => {
       body: `export default { id: "allowed", register(api) { api.registerGatewayMethod("allowed.ping", ({ respond }) => respond(true, { ok: true })); } };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       workspaceDir: plugin.dir,
       config: {
@@ -239,7 +239,7 @@ describe("loadOpenClawPlugins", () => {
       body: `export default { id: "blocked", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       workspaceDir: plugin.dir,
       config: {
@@ -262,7 +262,7 @@ describe("loadOpenClawPlugins", () => {
       body: `export default { id: "configurable", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       workspaceDir: plugin.dir,
       config: {
@@ -308,7 +308,7 @@ describe("loadOpenClawPlugins", () => {
 } };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       workspaceDir: plugin.dir,
       config: {
@@ -332,7 +332,7 @@ describe("loadOpenClawPlugins", () => {
 } };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       workspaceDir: plugin.dir,
       config: {
@@ -358,7 +358,7 @@ describe("loadOpenClawPlugins", () => {
 } };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       workspaceDir: plugin.dir,
       config: {
@@ -383,7 +383,7 @@ describe("loadOpenClawPlugins", () => {
       body: `export default { id: "config-disable", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       config: {
         plugins: {
@@ -410,7 +410,7 @@ describe("loadOpenClawPlugins", () => {
       body: `export default { id: "memory-b", kind: "memory", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       config: {
         plugins: {
@@ -433,7 +433,7 @@ describe("loadOpenClawPlugins", () => {
       body: `export default { id: "memory-off", kind: "memory", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       config: {
         plugins: {
@@ -462,7 +462,7 @@ describe("loadOpenClawPlugins", () => {
       body: `export default { id: "shadow", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadReecenbotPlugins({
       cache: false,
       config: {
         plugins: {

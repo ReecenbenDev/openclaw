@@ -1,4 +1,4 @@
-package ai.openclaw.android
+package ai.reecenbot.android
 
 enum class LocationMode(val rawValue: String) {
   Off("off"),

@@ -1,4 +1,4 @@
-name: OpenClaw
+name: Reecenbot
 options:
   bundleIdPrefix: ai.openclaw
   deploymentTarget:
@@ -10,33 +10,33 @@ settings:
     SWIFT_VERSION: "6.0"
 
 packages:
-  OpenClawKit:
-    path: ../shared/OpenClawKit
+  ReecenbotKit:
+    path: ../shared/ReecenbotKit
   Swabble:
     path: ../../Swabble
 
 schemes:
-  OpenClaw:
+  Reecenbot:
     shared: true
     build:
       targets:
-        OpenClaw: all
+        Reecenbot: all
     test:
       targets:
-        - OpenClawTests
+        - ReecenbotTests
 
 targets:
-  OpenClaw:
+  Reecenbot:
     type: application
     platform: iOS
     sources:
       - path: Sources
     dependencies:
-      - package: OpenClawKit
-      - package: OpenClawKit
-        product: OpenClawChatUI
-      - package: OpenClawKit
-        product: OpenClawProtocol
+      - package: ReecenbotKit
+      - package: ReecenbotKit
+        product: ReecenbotChatUI
+      - package: ReecenbotKit
+        product: ReecenbotProtocol
       - package: Swabble
         product: SwabbleKit
       - sdk: AppIntents.framework
@@ -79,7 +79,7 @@ targets:
     info:
       path: Sources/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw
+        CFBundleDisplayName: Reecenbot
         CFBundleIconName: AppIcon
         CFBundleShortVersionString: "2026.1.27-beta.1"
         CFBundleVersion: "20260126"
@@ -88,16 +88,16 @@ targets:
           UIApplicationSupportsMultipleScenes: false
         UIBackgroundModes:
           - audio
-        NSLocalNetworkUsageDescription: OpenClaw discovers and connects to your OpenClaw gateway on the local network.
+        NSLocalNetworkUsageDescription: Reecenbot discovers and connects to your Reecenbot gateway on the local network.
         NSAppTransportSecurity:
           NSAllowsArbitraryLoadsInWebContent: true
         NSBonjourServices:
           - _openclaw-gw._tcp
-        NSCameraUsageDescription: OpenClaw can capture photos or short video clips when requested via the gateway.
-        NSLocationWhenInUseUsageDescription: OpenClaw uses your location when you allow location sharing.
-        NSLocationAlwaysAndWhenInUseUsageDescription: OpenClaw can share your location in the background when you enable Always.
-        NSMicrophoneUsageDescription: OpenClaw needs microphone access for voice wake.
-        NSSpeechRecognitionUsageDescription: OpenClaw uses on-device speech recognition for voice wake.
+        NSCameraUsageDescription: Reecenbot can capture photos or short video clips when requested via the gateway.
+        NSLocationWhenInUseUsageDescription: Reecenbot uses your location when you allow location sharing.
+        NSLocationAlwaysAndWhenInUseUsageDescription: Reecenbot can share your location in the background when you enable Always.
+        NSMicrophoneUsageDescription: Reecenbot needs microphone access for voice wake.
+        NSSpeechRecognitionUsageDescription: Reecenbot uses on-device speech recognition for voice wake.
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationPortraitUpsideDown
@@ -109,13 +109,13 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
 
-  OpenClawTests:
+  ReecenbotTests:
     type: bundle.unit-test
     platform: iOS
     sources:
       - path: Tests
     dependencies:
-      - target: OpenClaw
+      - target: Reecenbot
       - package: Swabble
         product: SwabbleKit
       - sdk: AppIntents.framework
@@ -124,11 +124,11 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: ai.openclaw.ios.tests
         SWIFT_VERSION: "6.0"
         SWIFT_STRICT_CONCURRENCY: complete
-        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/OpenClaw.app/OpenClaw"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Reecenbot.app/Reecenbot"
         BUNDLE_LOADER: "$(TEST_HOST)"
     info:
       path: Tests/Info.plist
       properties:
-        CFBundleDisplayName: OpenClawTests
+        CFBundleDisplayName: ReecenbotTests
         CFBundleShortVersionString: "2026.1.27-beta.1"
         CFBundleVersion: "20260126"

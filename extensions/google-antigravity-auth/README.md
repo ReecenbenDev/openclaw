@@ -1,4 +1,4 @@
-# Google Antigravity Auth (OpenClaw plugin)
+# Google Antigravity Auth (Reecenbot plugin)
 
 OAuth provider plugin for **Google Antigravity** (Cloud Code Assist).
 
